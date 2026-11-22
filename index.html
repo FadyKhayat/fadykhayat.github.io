@@ -82,7 +82,7 @@ h1,h2,.brand{margin:0;font-weight:800;font-stretch:62%;text-transform:uppercase;
 .sub{margin-bottom:1.5rem;padding:0 var(--pad)}
 .sub h2{font-size:clamp(2.5rem,7vw,5rem)}
 
-.about{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(2rem,6vw,5rem);align-items:start}
+.about{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:clamp(2rem,6vw,5rem);align-items:start}
 .about h2{font-size:clamp(3rem,8vw,6rem);margin-bottom:1.5rem}
 .about p{max-width:62ch;margin:0 0 1.25rem;color:var(--muted)}
 
@@ -107,7 +107,7 @@ dialog.v{width:auto;height:min(88vh,calc(94vw*16/9));aspect-ratio:9/16}
 .lbnav{position:absolute;top:50%;transform:translateY(-50%);font-size:2.5rem;line-height:1;padding:.5rem 1rem;background:rgba(10,10,11,.6)}
 #prev{left:0}
 #next{right:0}
-@media (max-width:760px){.strip{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.grid .wide{--r:16/9}.about{grid-template-columns:1fr}.spec div{grid-template-columns:1fr;gap:.25rem}.top nav{gap:1rem}}
+@media (max-width:760px){.strip{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.grid .wide{--r:16/9}.about{grid-template-columns:1fr}.about .tile{max-width:260px}.spec div{grid-template-columns:1fr;gap:.25rem}.top nav{gap:1rem}}
 </style>
 </head>
 <body>
