@@ -99,7 +99,7 @@ dialog video{display:block;width:100%;height:100%;background:#000}
 .about p{max-width:62ch;margin:0 0 1.25rem;color:var(--muted)}
 
 .mail{font-size:clamp(1.25rem,3vw,2rem);font-weight:700;font-stretch:90%;overflow-wrap:anywhere}
-.icons{display:flex;flex-wrap:wrap;gap:.75rem;list-style:none;margin:1.25rem 0 0;padding:0}
+.icons{display:flex;flex-wrap:wrap;justify-content:center;gap:.75rem;list-style:none;margin:1.25rem 0 0;padding:0}
 .ico{display:inline-grid;place-items:center;width:46px;height:46px;border:1px solid var(--line);border-radius:50%;color:var(--text);text-decoration:none;transition:background .2s,color .2s}
 .ico svg{width:20px;height:20px}
 .ico:hover,.ico:focus-visible{background:var(--text);color:var(--bg);border-color:var(--text)}
@@ -221,9 +221,9 @@ dialog.v{width:auto;height:min(88vh,calc(94vw*16/9));aspect-ratio:9/16}
         </div>
         <p id="briefMsg" role="status" aria-live="polite"></p>
       </form>
-      <div class="direct">
-        <ul class="icons" id="socials"></ul>
-      </div>
+    </div>
+    <div class="direct">
+      <ul class="icons" id="socials"></ul>
     </div>
   </section>
 </main>
@@ -251,7 +251,7 @@ const LINKS = { // leave "" to hide a link
   X: "",
   Behance: "",
   ArtStation: "",
-  GitHub: "https://github.com/FadyKhayat"
+  GitHub: ""
 };
 const SHOWREEL_FILE = "videos/showreel.mp4"; // Video file in the videos folder, e.g. "videos/showreel.mp4". Used instead of the YouTube ID below.
 const SHOWREEL = ""; // YouTube video ID, e.g. "dQw4w9WgXcQ"
