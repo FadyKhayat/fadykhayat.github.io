@@ -32,7 +32,7 @@ SETUP (everything you edit is in the script at the bottom, inside the EDIT HERE 
 6. Book a call: paste your Calendly or Cal.com link into BOOKING. Until then the button opens an email to you.
 -->
 <style>
-:root{--bg:#0a0a0b;--text:#f2f2f0;--muted:#9a9a9f;--line:#2a2a2e;--pad:clamp(1rem,4vw,3rem);color-scheme:dark}
+:root{--sec:clamp(4rem,9vw,7rem);--bg:#0a0a0b;--text:#f2f2f0;--muted:#9a9a9f;--line:#2a2a2e;--pad:clamp(1rem,4vw,3rem);color-scheme:dark}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{scroll-behavior:smooth}
@@ -67,21 +67,19 @@ dialog video{display:block;width:100%;height:100%;background:#000}
 .tile{display:block;aspect-ratio:var(--r,4/5);background:var(--img,linear-gradient(#0000,#0000)) center/cover,linear-gradient(160deg,#26262b,#141416)}
 .tile[role=button]{cursor:pointer;transition:filter .3s}
 .tile[role=button]:hover{filter:brightness(1.18)}
-.strip,.grid{display:grid;gap:6px;padding:0 var(--pad)}
-.strip{grid-template-columns:repeat(4,1fr);margin-top:6px}
-.strip .tile{--r:16/10}
-.grid{grid-template-columns:repeat(6,1fr);gap:2.5rem 6px;--r:16/9}
-.grid .wide{grid-column:1/-1;--r:21/9}
-.grid .vcard{grid-column:span 2;--r:3/4}
-.card{margin:0;grid-column:span 3}
+.grid{display:grid;gap:6px;padding:0 var(--pad)}
+.grid{display:flex;flex-wrap:wrap;justify-content:center;gap:2.5rem 6px;--r:16/9}
+.grid .wide{flex:0 0 100%;--r:21/9}
+.grid .vcard{flex:0 0 calc(33.333% - 4px);--r:3/4}
+.card{margin:0;min-width:0;flex:0 0 calc(50% - 3px)}
 .card[hidden]{display:none}
-.card figcaption{padding:.9rem 0 0}
+.card figcaption{padding:.9rem 0 0;text-align:center}
 .card h3{margin:0;font-size:1.15rem;font-weight:700;line-height:1.3}
 .card .lab{display:block;margin:.2rem 0 .4rem;color:var(--muted)}
-.card p{margin:0;color:var(--muted);max-width:62ch;font-size:.95rem}
+.card p{margin:0 auto;color:var(--muted);max-width:62ch;font-size:.95rem}
 .more{all:unset;cursor:pointer;display:inline-block;margin-top:.7rem;font-size:.8125rem;letter-spacing:.14em;text-transform:uppercase;border-bottom:1px solid var(--text)}
 .more:focus-visible{outline:2px solid var(--text);outline-offset:3px}
-.filters{display:flex;flex-wrap:wrap;gap:.5rem 1.75rem;padding:0 var(--pad);margin:1.5rem 0 1.75rem}
+.filters{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem 1.75rem;padding:0 var(--pad);margin:1.5rem 0 1.75rem}
 .filters button{all:unset;cursor:pointer;color:var(--muted);font-size:.8125rem;letter-spacing:.14em;text-transform:uppercase;padding:.25rem 0}
 .filters button[aria-pressed=true]{color:var(--text);border-bottom:1px solid var(--text)}
 .filters button:focus-visible{outline:2px solid var(--text);outline-offset:3px}
@@ -90,8 +88,9 @@ dialog video{display:block;width:100%;height:100%;background:#000}
 .pic img{position:relative;display:block;width:100%;height:100%;object-fit:contain;transition:filter .3s}
 .pic:hover img{filter:brightness(1.12)}
 .pic .cta{position:absolute;right:.75rem;bottom:.75rem;z-index:1;padding:.35rem .7rem;background:rgba(10,10,11,.75);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase}
-.block{padding:clamp(4rem,10vw,8rem) var(--pad)}
+.block{padding:var(--sec) var(--pad) 0}
 .center{text-align:center}
+.center p:last-child{margin-bottom:0}
 .center h2{font-size:clamp(3rem,9vw,6.5rem);margin-bottom:1.5rem}
 .center p{max-width:58ch;margin:0 auto 1.25rem;color:var(--muted)}
 .svc{margin:0 0 1rem;font-size:clamp(1.1rem,2.6vw,1.6rem);font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--text)!important}
@@ -99,10 +98,10 @@ dialog video{display:block;width:100%;height:100%;background:#000}
 .reel{position:relative;aspect-ratio:16/9;display:grid;place-items:center;background:#18181b;color:var(--muted)}
 .reel iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .reelwrap{padding:0 var(--pad)}
-.sub{margin-bottom:1.5rem;padding:0 var(--pad)}
+.sub{margin-bottom:1.5rem;padding:0 var(--pad);text-align:center}
 .sub h2{font-size:clamp(2.5rem,7vw,5rem)}
 
-.about{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:clamp(2rem,6vw,5rem);align-items:start}
+.about{display:grid;grid-template-columns:minmax(0,320px) minmax(0,62ch);justify-content:center;gap:clamp(2rem,6vw,5rem);align-items:start}
 .about h2{font-size:clamp(3rem,8vw,6rem);margin-bottom:1.5rem}
 .about p{max-width:62ch;margin:0 0 1.25rem;color:var(--muted)}
 
@@ -113,7 +112,7 @@ dialog video{display:block;width:100%;height:100%;background:#000}
 .ico:hover,.ico:focus-visible{background:var(--text);color:var(--bg);border-color:var(--text)}
 .ico.txt{width:auto;padding:0 1.1rem;border-radius:23px;font-size:.8125rem;letter-spacing:.14em;text-transform:uppercase}
 button.btn{font-family:inherit;cursor:pointer;line-height:inherit;color:inherit;background:none}
-.brief{max-width:900px;margin:0}
+.brief{max-width:900px;margin:0 auto}
 .brief h2{font-size:clamp(2.5rem,7vw,5rem);margin-bottom:1rem}
 .brief>p{color:var(--muted);max-width:58ch;margin:0 0 2rem}
 .fields{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem 1.5rem}
@@ -129,8 +128,8 @@ button.btn{font-family:inherit;cursor:pointer;line-height:inherit;color:inherit;
 .mailsm{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);text-decoration:none;overflow-wrap:anywhere}
 .mailsm svg{width:15px;height:15px;flex:none}
 .mailsm:hover{color:var(--text)}
-.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.25rem 2rem;padding:2rem var(--pad) 3rem;border-top:1px solid var(--line);color:var(--muted);font-size:.875rem}
-.foot strong{display:block;color:var(--text);font-weight:700;font-size:1rem}
+.foot{margin-top:var(--sec);display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.25rem 2rem;padding:2rem var(--pad) 3rem;border-top:1px solid var(--line);color:var(--muted);font-size:.875rem}
+.foot strong{display:block;margin-bottom:.6rem;color:var(--text);font-size:1.5rem;font-weight:800;font-stretch:62%;text-transform:uppercase;line-height:.88}
 .foot p{margin:0}
 
 dialog{border:0;padding:0;background:#000;width:min(1000px,94vw);aspect-ratio:16/9;overflow:visible}
@@ -145,7 +144,7 @@ dialog.v{width:auto;height:min(88vh,calc(94vw*16/9));aspect-ratio:9/16}
 .lbnav{position:absolute;top:50%;transform:translateY(-50%);font-size:2.5rem;line-height:1;padding:.5rem 1rem;background:rgba(10,10,11,.6)}
 #prev{left:0}
 #next{right:0}
-@media (max-width:760px){.strip{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.grid .wide{--r:16/9}.card,.grid .wide,.grid .vcard{grid-column:auto}.about{grid-template-columns:1fr}.about .tile{max-width:260px}.stage{aspect-ratio:auto;background:none}.vid{position:relative;aspect-ratio:16/9;background:linear-gradient(160deg,#26262b,#141416)}.stage::after{display:none}.stage .in{position:static;padding:1.25rem 0 0}.hero h1{font-size:clamp(3rem,16vw,5rem)}.fields{grid-template-columns:1fr}.top nav{gap:1rem}}
+@media (max-width:760px){.grid .wide{--r:16/9}.card,.grid .wide,.grid .vcard{flex-basis:100%}.about{grid-template-columns:1fr}.about .tile{max-width:260px}.stage{aspect-ratio:auto;background:none}.vid{position:relative;aspect-ratio:16/9;background:linear-gradient(160deg,#26262b,#141416)}.stage::after{display:none}.stage .in{position:static;padding:1.25rem 0 0}.hero h1{font-size:clamp(3rem,16vw,5rem)}.fields{grid-template-columns:1fr}.top nav{gap:1rem}}
 </style>
 </head>
 <body>
@@ -175,15 +174,13 @@ dialog.v{width:auto;height:min(88vh,calc(94vw*16/9));aspect-ratio:9/16}
     </div>
   </section>
 
-  <div class="strip" id="strip" aria-hidden="true"></div>
-
   <section class="block center">
     <h2>Welcome</h2>
     <p>I’m a 3D artist in Beirut. I make product CGI, FOOH ads and virtual tours that look real, move well and fit the feed they’re made for.</p>
     <p>Tell me what you need to sell, show or build.</p>
   </section>
 
-  <section class="block" id="work" style="padding-bottom:0">
+  <section class="block" id="work">
     <div class="sub" style="padding:0"><h2>Work</h2></div>
   </section>
   <div class="filters" id="filters" role="group" aria-label="Filter work"></div>
@@ -196,7 +193,7 @@ dialog.v{width:auto;height:min(88vh,calc(94vw*16/9));aspect-ratio:9/16}
     <p class="svc">Environments<span>•</span>Characters</p>
   </section>
 
-  <section class="block about" id="about" style="padding-top:0">
+  <section class="block about" id="about">
     <div class="tile" style="--img:url(images/fady.jpg)" role="img" aria-label="Portrait of Fady Khayat"></div>
     <div>
       <h2>About me</h2>
@@ -205,7 +202,7 @@ dialog.v{width:auto;height:min(88vh,calc(94vw*16/9));aspect-ratio:9/16}
     </div>
   </section>
 
-  <section class="block" id="contact" style="padding-top:0">
+  <section class="block" id="contact">
     <div class="brief" id="brief">
       <h2>Tell me about your vision</h2>
       <p>Drop a line about the project — timeline, scope, vibe — or skip the form and book a call.</p>
@@ -265,18 +262,17 @@ const LINKS = { // leave "" to hide a link
 const SHOWREEL_FILE = "videos/showreel.mp4"; // Video file in the videos folder, e.g. "videos/showreel.mp4". Used instead of the YouTube ID below.
 const SHOWREEL = ""; // YouTube video ID, e.g. "dQw4w9WgXcQ"
 const FORM_ENDPOINT = "https://formsubmit.co/ajax/" + EMAIL; // briefs are emailed to EMAIL
-const HERO = ["images/overgrown-can.jpg", "images/f40.jpg", "images/nike.jpg", "images/burger.jpg"]; // 4 images for the strip under your name
 // img = file in the images folder. yt = YouTube video ID (opens in a pop-up). link = page to open (tour, Behance, Upwork).
 const PROJECTS = [
   {title:"Sci-fi city street", cat:"Environments", desc:"A cinematic street scene built around lighting, atmosphere and a small story, shown with clay breakdowns.", img:"images/sci-fi-street.jpg", yt:"", link:""},
-  {title:"3D gym virtual tour", cat:"VR tours", desc:"A dark, cinematic gym you can walk through in 360°, with a full reverse view of reception, shop area and exit.", img:"images/dark-gym-360.jpg", yt:"", link:"https://fadykhayat.github.io/3D-Gym-VirtualTour/"},
+  {title:"F40 in the garage", cat:"Product CGI", desc:"A white F40 in a dark garage, animated to Under Vato’s “Me Fume Un Gallito”.", img:"images/f40.jpg", yt:"", link:""},
   {title:"Overgrown soda can", cat:"Environments", desc:"A soda can reclaimed by nature in an abandoned world, built in Blender and graded in Photoshop.", img:"images/overgrown-can.jpg", yt:"", link:""},
+  {title:"OBSBOT Tail 2 at the Esports World Cup", cat:"Product CGI", desc:"Product renders of the OBSBOT Tail 2 beside a 3D recreation of the Esports World Cup trophy in an arena-style setup.", img:"images/obsbot-tail2.jpg", yt:"", link:""},
   {title:"Nike concept animation", cat:"Product CGI", desc:"A 3D concept animation created for Nike.", img:"images/nike.jpg", yt:"WoCnpJXumZQ", vertical:true, link:""},
   {title:"Giant burger", cat:"FOOH & VFX", desc:"An oversized burger breaking through a building’s glass façade, with destruction simulation and animated crowd reactions.", img:"images/burger.jpg", yt:"iBRjwx8IOzk", vertical:true, link:""},
-  {title:"Interactive apartment tour", cat:"VR tours", desc:"A client’s floor plan turned into an interactive 4K 360° tour, modeled and textured in Blender and built in 3DVista for desktop, mobile and VR headsets.", img:"images/apartment-tour.jpg", yt:"", link:"https://fadykhayat.github.io/3DVirtualTour/"},
-  {title:"F40 in the garage", cat:"Product CGI", desc:"A white F40 in a dark garage, animated to Under Vato’s “Me Fume Un Gallito”.", img:"images/f40.jpg", yt:"", link:""},
   {title:"OBSBOT Meet 2 commercial", cat:"Product CGI", desc:"A product-commercial concept with a camera inside a vending machine and a playful reveal.", img:"images/obsbot-meet2.jpg", yt:"b8raXn_Vt4Y", vertical:true, link:""},
-  {title:"OBSBOT Tail 2 at the Esports World Cup", cat:"Product CGI", desc:"Product renders of the OBSBOT Tail 2 beside a 3D recreation of the Esports World Cup trophy in an arena-style setup.", img:"images/obsbot-tail2.jpg", yt:"", link:""}
+  {title:"3D gym virtual tour", cat:"VR tours", desc:"A dark, cinematic gym you can walk through in 360°, with a full reverse view of reception, shop area and exit.", img:"images/dark-gym-360.jpg", yt:"", link:"https://fadykhayat.github.io/3D-Gym-VirtualTour/"},
+  {title:"Interactive apartment tour", cat:"VR tours", desc:"A client’s floor plan turned into an interactive 4K 360° tour, modeled and textured in Blender and built in 3DVista for desktop, mobile and VR headsets.", img:"images/apartment-tour.jpg", yt:"", link:"https://fadykhayat.github.io/3DVirtualTour/"}
 ];
 /* ===== end of editable area ===== */
 
@@ -285,7 +281,6 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":
 const grid = $("#grid"), filters = $("#filters"), dlg = $("#dlg"), frame = $("#frame");
 
 document.querySelectorAll(".mailsm").forEach(a => { a.href = "mailto:" + EMAIL; a.querySelector("span").textContent = EMAIL; });
-$("#strip").innerHTML = HERO.map(s => `<div class="tile" style="--img:url(${esc(s)})"></div>`).join("");
 
 const book = $("#bookBtn");
 if (BOOKING) { book.href = BOOKING; book.target = "_blank"; book.rel = "noopener"; }
