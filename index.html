@@ -16,14 +16,17 @@
 SETUP (everything you edit is in the script at the bottom, inside the EDIT HERE block)
 1. Put your images in an "images" folder next to this file. Names are listed in PROJECTS (img), plus fady.jpg for the portrait.
    Missing images show a dark placeholder.
-2. Add your Upwork, YouTube, TikTok and X links in LINKS. Empty ones are hidden.
+2. Add your YouTube, TikTok and X links in LINKS. Each link shows as a clickable icon (email too). Empty ones are hidden.
 3. For each project add a YouTube video ID (yt) or any page link (link). Leave both empty and clicking the tile opens the full image.
    Extra images are found automatically: name them like the main image plus -2, -3, -4 (sci-fi-street-2.jpg, sci-fi-street-3.jpg). vertical:true makes a YouTube Short play tall.
-4. Showreel: paste a YouTube video ID into SHOWREEL.
+4. Showreel: paste a YouTube video ID into SHOWREEL. It plays muted behind your name at the top, with a "Watch with sound" button.
+5. Brief form: the first time anyone sends a brief, FormSubmit emails you a link to confirm your address. Click it once (check spam). Test only on the live site.
+6. Book a call: paste your Calendly or Cal.com link into BOOKING. Until then the button opens an email to you.
 -->
 <style>
 :root{--bg:#0a0a0b;--text:#f2f2f0;--muted:#9a9a9f;--line:#2a2a2e;--pad:clamp(1rem,4vw,3rem);color-scheme:dark}
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{margin:0;background:var(--bg);color:var(--text);font:400 1rem/1.65 Archivo,"Helvetica Neue",Arial,sans-serif}
@@ -37,8 +40,16 @@ h1,h2,.brand{margin:0;font-weight:800;font-stretch:62%;text-transform:uppercase;
 .top nav{display:flex;gap:1.75rem}
 .top nav a,.btn,.lab{font-size:.8125rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none}
 
-.hero{padding:clamp(2.5rem,8vw,6rem) var(--pad) clamp(2rem,5vw,3.5rem)}
-.hero h1{font-size:clamp(4.5rem,20vw,16rem);margin-bottom:2rem}
+.hero{padding:0 var(--pad)}
+.stage{position:relative;aspect-ratio:16/9;overflow:hidden;background:linear-gradient(160deg,#26262b,#141416)}
+.stage::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,11,.85),rgba(10,10,11,.1) 60%,rgba(10,10,11,.3));pointer-events:none}
+.vid{position:absolute;inset:0}
+.vid iframe{width:100%;height:100%;border:0;pointer-events:none}
+.vid video{display:block;width:100%;height:100%;object-fit:cover;pointer-events:none}
+dialog video{display:block;width:100%;height:100%;background:#000}
+.stage .in{position:absolute;inset:auto 0 0 0;z-index:1;padding:clamp(1rem,3vw,2.5rem)}
+.stage .soon{position:absolute;top:1rem;right:1rem;z-index:1;color:var(--muted)}
+.hero h1{font-size:clamp(3rem,11vw,10rem);margin-bottom:1.25rem}
 .btns{display:flex;flex-wrap:wrap;gap:.75rem}
 .btn{display:inline-block;padding:.9rem 1.6rem;border:1px solid var(--text)}
 .btn:hover{background:var(--text);color:var(--bg)}
@@ -49,7 +60,8 @@ h1,h2,.brand{margin:0;font-weight:800;font-stretch:62%;text-transform:uppercase;
 .tile[role=button]{cursor:pointer;transition:filter .3s}
 .tile[role=button]:hover{filter:brightness(1.18)}
 .strip,.grid{display:grid;gap:6px;padding:0 var(--pad)}
-.strip{grid-template-columns:repeat(4,1fr)}
+.strip{grid-template-columns:repeat(4,1fr);margin-top:6px}
+.strip .tile{--r:16/10}
 .grid{grid-template-columns:repeat(2,1fr);gap:2.5rem 6px;--r:16/9}
 .grid .wide{grid-column:1/-1;--r:21/9}
 .card{margin:0}
@@ -86,14 +98,32 @@ h1,h2,.brand{margin:0;font-weight:800;font-stretch:62%;text-transform:uppercase;
 .about h2{font-size:clamp(3rem,8vw,6rem);margin-bottom:1.5rem}
 .about p{max-width:62ch;margin:0 0 1.25rem;color:var(--muted)}
 
-.spec{margin:0;border-top:1px solid var(--line)}
-.spec div{display:grid;grid-template-columns:10rem 1fr;gap:1rem;padding:1.25rem 0;border-bottom:1px solid var(--line)}
-.spec dt{font:400 .8125rem/1.8 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--muted)}
-.spec dd{margin:0}
-.spec ul{margin:0;padding:0;list-style:none}
-.spec li small{color:var(--muted)}
 .mail{font-size:clamp(1.25rem,3vw,2rem);font-weight:700;font-stretch:90%;overflow-wrap:anywhere}
-footer{padding:0 var(--pad) 3rem;color:var(--muted);font-size:.875rem}
+.icons{display:flex;flex-wrap:wrap;gap:.75rem;list-style:none;margin:1.25rem 0 0;padding:0}
+.ico{display:inline-grid;place-items:center;width:46px;height:46px;border:1px solid var(--line);border-radius:50%;color:var(--text);text-decoration:none;transition:background .2s,color .2s}
+.ico svg{width:20px;height:20px}
+.ico:hover,.ico:focus-visible{background:var(--text);color:var(--bg);border-color:var(--text)}
+.ico.txt{width:auto;padding:0 1.1rem;border-radius:23px;font-size:.8125rem;letter-spacing:.14em;text-transform:uppercase}
+button.btn{font-family:inherit;cursor:pointer;line-height:inherit;color:inherit;background:none}
+.brief{max-width:900px;margin:0}
+.brief h2{font-size:clamp(2.5rem,7vw,5rem);margin-bottom:1rem}
+.brief>p{color:var(--muted);max-width:58ch;margin:0 0 2rem}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem 1.5rem}
+.fields .full{grid-column:1/-1}
+.fld label{display:block;margin-bottom:.4rem;font-size:.8125rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.fld input,.fld select,.fld textarea{width:100%;padding:.85rem 1rem;background:#111114;color:var(--text);border:1px solid var(--line);border-radius:0;font:inherit}
+.fld textarea{min-height:9rem;resize:vertical}
+.fld input:focus,.fld select:focus,.fld textarea:focus{outline:2px solid var(--text);outline-offset:2px}
+.hp{position:absolute;left:-9999px}
+#briefMsg{margin:1rem 0 0;min-height:1.5rem}
+.direct{margin:2rem 0 0}
+.brief>p.alt{margin:0 0 2.5rem;font-size:.875rem;color:var(--muted)}
+.mailsm{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);text-decoration:none;overflow-wrap:anywhere}
+.mailsm svg{width:15px;height:15px;flex:none}
+.mailsm:hover{color:var(--text)}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.25rem 2rem;padding:2rem var(--pad) 3rem;border-top:1px solid var(--line);color:var(--muted);font-size:.875rem}
+.foot strong{display:block;color:var(--text);font-weight:700;font-size:1rem}
+.foot p{margin:0}
 
 dialog{border:0;padding:0;background:#000;width:min(1000px,94vw);aspect-ratio:16/9;overflow:visible}
 dialog::backdrop{background:rgba(0,0,0,.82)}
@@ -107,7 +137,7 @@ dialog.v{width:auto;height:min(88vh,calc(94vw*16/9));aspect-ratio:9/16}
 .lbnav{position:absolute;top:50%;transform:translateY(-50%);font-size:2.5rem;line-height:1;padding:.5rem 1rem;background:rgba(10,10,11,.6)}
 #prev{left:0}
 #next{right:0}
-@media (max-width:760px){.strip{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.grid .wide{--r:16/9}.about{grid-template-columns:1fr}.about .tile{max-width:260px}.spec div{grid-template-columns:1fr;gap:.25rem}.top nav{gap:1rem}}
+@media (max-width:760px){.strip{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.grid .wide{--r:16/9}.about{grid-template-columns:1fr}.about .tile{max-width:260px}.stage{aspect-ratio:auto;background:none}.vid{position:relative;aspect-ratio:16/9;background:linear-gradient(160deg,#26262b,#141416)}.stage::after{display:none}.stage .in{position:static;padding:1.25rem 0 0}.hero h1{font-size:clamp(3rem,16vw,5rem)}.fields{grid-template-columns:1fr}.top nav{gap:1rem}}
 </style>
 </head>
 <body>
@@ -115,6 +145,7 @@ dialog.v{width:auto;height:min(88vh,calc(94vw*16/9));aspect-ratio:9/16}
   <a class="brand" href="#">Fady Khayat</a>
   <nav aria-label="Main">
     <a href="#work">Work</a>
+    <a href="#services">Services</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </nav>
@@ -122,10 +153,17 @@ dialog.v{width:auto;height:min(88vh,calc(94vw*16/9));aspect-ratio:9/16}
 
 <main>
   <section class="hero">
-    <h1>Fady<br>Khayat</h1>
-    <div class="btns">
-      <a class="btn solid" href="#work">View work</a>
-      <a class="btn" id="hireBtn" href="#contact">Start a project</a>
+    <div class="stage">
+      <div class="vid" id="reel"></div>
+      <span class="lab soon" id="soon">Showreel coming soon</span>
+      <div class="in">
+        <h1>Fady<br>Khayat</h1>
+        <div class="btns">
+          <a class="btn solid" href="#work">View work</a>
+          <button class="btn" id="reelBtn" type="button" hidden>Watch with sound</button>
+          <a class="btn" href="#brief">Send a brief</a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -137,23 +175,20 @@ dialog.v{width:auto;height:min(88vh,calc(94vw*16/9));aspect-ratio:9/16}
     <p>Tell me what you need to sell, show or build.</p>
   </section>
 
-  <section class="block center" style="padding-top:0">
-    <h2>Services</h2>
-    <p>For a quote or availability, email <a class="emailLink" href="#"></a>.</p>
-    <p class="svc">Product CGI<span>•</span>3D Animation<span>•</span>FOOH &amp; VFX Ads</p>
-    <p class="svc">Virtual Tours<span>•</span>VR<span>•</span>Creative Design</p>
-    <p class="svc">Environments<span>•</span>Characters<span>•</span>3D Fashion</p>
-  </section>
-
-  <div class="reelwrap"><div class="reel" id="reel"><span>Showreel coming soon</span></div></div>
-
   <section class="block" id="work" style="padding-bottom:0">
     <div class="sub" style="padding:0"><h2>Work</h2></div>
   </section>
   <div class="filters" id="filters" role="group" aria-label="Filter work"></div>
   <div class="grid" id="grid"></div>
 
-  <section class="block about" id="about">
+  <section class="block center" id="services">
+    <h2>Services</h2>
+    <p class="svc">Product CGI<span>•</span>3D Animation<span>•</span>FOOH &amp; VFX Ads</p>
+    <p class="svc">Virtual Tours<span>•</span>VR<span>•</span>Creative Design</p>
+    <p class="svc">Environments<span>•</span>Characters</p>
+  </section>
+
+  <section class="block about" id="about" style="padding-top:0">
     <div class="tile" style="--img:url(images/fady.jpg)" role="img" aria-label="Portrait of Fady Khayat"></div>
     <div>
       <h2>About me</h2>
@@ -163,35 +198,52 @@ dialog.v{width:auto;height:min(88vh,calc(94vw*16/9));aspect-ratio:9/16}
   </section>
 
   <section class="block" id="contact" style="padding-top:0">
-    <dl class="spec">
-      <div><dt>Name</dt><dd>Fady Khayat</dd></div>
-      <div><dt>Based in</dt><dd>Beirut, Lebanon. Working worldwide, remotely.</dd></div>
-      <div><dt>Availability</dt><dd>Open to freelance projects, creative collaborations and contract work.</dd></div>
-      <div><dt>Services</dt><dd><ul><li>Product CGI and 3D animation</li><li>FOOH and VFX ads</li><li>Virtual tours and VR</li><li>Environments, characters and architectural visualization</li><li>3D fashion and garments</li><li>Creative design</li></ul></dd></div>
-      <div><dt>Experience</dt><dd><ul>
-        <li>3D Artist &amp; VR Creator, Freelance <small>2023 to present</small></li>
-        <li>Graphic Designer, M&amp;C Saatchi <small>2022 to 2023</small></li>
-        <li>Founder &amp; Creative Director, Saints In Da Hood <small>2021 to present</small></li>
-        <li>Graphic Designer, Freelance <small>2019 to present</small></li>
-      </ul></dd></div>
-      <div><dt>Tools</dt><dd>Blender, Unreal Engine 5, ZBrush, Substance 3D Painter, Marvelous Designer, 3DVista, After Effects, Premiere Pro, Photoshop, Illustrator</dd></div>
-      <div><dt>Languages</dt><dd>English, Arabic, French</dd></div>
-      <div><dt>Socials</dt><dd><ul id="socials"></ul></dd></div>
-      <div><dt>Email</dt><dd><a class="mail emailLink" href="#"></a></dd></div>
-    </dl>
+    <div class="brief" id="brief">
+      <h2>Tell me about your vision</h2>
+      <p>Drop a line about the project — timeline, scope, vibe — or skip the form and book a call.</p>
+      <div class="btns" style="margin:0 0 1rem"><a class="btn solid" id="bookBtn" href="#">Book a 30 min call</a></div>
+      <p class="alt"><a class="mailsm" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span></span></a></p>
+      <form id="briefForm">
+        <div class="fields">
+          <div class="fld"><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" required></div>
+          <div class="fld"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+          <div class="fld"><label for="f-co">Company (optional)</label><input id="f-co" name="company" autocomplete="organization"></div>
+          <div class="fld"><label for="f-svc">What do you need?</label><select id="f-svc" name="service"><option>Product CGI or 3D animation</option><option>FOOH or VFX ad</option><option>Virtual tour or VR</option><option>Environment, character or ArchViz</option><option>Something else</option></select></div>
+          <div class="fld"><label for="f-bud">Budget</label><select id="f-bud" name="budget"><option>Not sure yet</option><option>Under $500</option><option>$500 to $1,500</option><option>$1,500 to $5,000</option><option>$5,000 to $10,000</option><option>$10,000+</option><option>Custom amount</option></select></div>
+          <div class="fld" id="custWrap" hidden><label for="f-cust">Your budget</label><input id="f-cust" name="custom_budget" placeholder="For example: $7,500 or €3,000"></div>
+          <div class="fld"><label for="f-dl">Deadline</label><input id="f-dl" name="deadline" placeholder="For example: 3 weeks, or 15 January"></div>
+          <div class="fld full"><label for="f-det">Project details</label><textarea id="f-det" name="details" required placeholder="What is it, who is it for, and what should the result do?"></textarea></div>
+          <div class="fld full"><label for="f-ref">Reference links (optional)</label><input id="f-ref" name="references" placeholder="Videos, images or files you like, or your product page"></div>
+          <input class="hp" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+        </div>
+        <div class="btns" style="margin-top:1.5rem">
+          <button class="btn solid" type="submit" id="briefBtn">Send brief</button>
+        </div>
+        <p id="briefMsg" role="status" aria-live="polite"></p>
+      </form>
+      <div class="direct">
+        <ul class="icons" id="socials"></ul>
+      </div>
+    </div>
   </section>
 </main>
 
-<footer>© 2026 Fady Khayat</footer>
+<footer class="foot">
+  <div>
+    <strong>Fady Khayat</strong>
+    <p>3D Artist &amp; Creative Director — based in Lebanon, working worldwide.</p>
+  </div>
+  <div>© 2026 Fady Khayat</div>
+</footer>
 
-<dialog id="dlg"><form method="dialog"><button aria-label="Close video">Close</button></form><iframe id="frame" title="Project video" allow="autoplay; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></dialog>
+<dialog id="dlg"><form method="dialog"><button aria-label="Close video">Close</button></form><iframe id="frame" title="Project video" allow="autoplay; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe><video id="dvid" controls playsinline hidden></video></dialog>
 <dialog id="lb"><form method="dialog"><button aria-label="Close image">Close</button></form><button class="lbnav" id="prev" aria-label="Previous image">‹</button><button class="lbnav" id="next" aria-label="Next image">›</button><img id="lbimg" alt=""><div id="lbcap"></div></dialog>
 
 <script>
 /* ===== EDIT HERE ===== */
 const EMAIL = "fadykhayat8@gmail.com";
+const BOOKING = ""; // Calendly or Cal.com link for the "Book a 30 min call" button. Empty = opens an email to you instead.
 const LINKS = { // leave "" to hide a link
-  Upwork: "",
   LinkedIn: "https://www.linkedin.com/in/fadykhayat/",
   Instagram: "https://www.instagram.com/fadykhayat/",
   YouTube: "",
@@ -201,7 +253,9 @@ const LINKS = { // leave "" to hide a link
   ArtStation: "",
   GitHub: "https://github.com/FadyKhayat"
 };
+const SHOWREEL_FILE = ""; // Video file in the videos folder, e.g. "videos/showreel.mp4". Used instead of the YouTube ID below.
 const SHOWREEL = ""; // YouTube video ID, e.g. "dQw4w9WgXcQ"
+const FORM_ENDPOINT = "https://formsubmit.co/ajax/" + EMAIL; // briefs are emailed to EMAIL
 const HERO = ["images/overgrown-can.jpg", "images/f40.jpg", "images/nike.jpg", "images/burger.jpg"]; // 4 images for the strip under your name
 // img = file in the images folder. yt = YouTube video ID (opens in a pop-up). link = page to open (tour, Behance, Upwork).
 const PROJECTS = [
@@ -221,16 +275,44 @@ const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const grid = $("#grid"), filters = $("#filters"), dlg = $("#dlg"), frame = $("#frame");
 
-document.querySelectorAll(".emailLink").forEach(a => { a.href = "mailto:" + EMAIL; a.textContent = EMAIL; });
+document.querySelectorAll(".mailsm").forEach(a => { a.href = "mailto:" + EMAIL; a.querySelector("span").textContent = EMAIL; });
 $("#strip").innerHTML = HERO.map(s => `<div class="tile" style="--img:url(${esc(s)})"></div>`).join("");
 
-if (LINKS.Upwork) { const b = $("#hireBtn"); b.href = LINKS.Upwork; b.textContent = "Hire me on Upwork"; }
-else $("#hireBtn").href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent("New project");
+const book = $("#bookBtn");
+if (BOOKING) { book.href = BOOKING; book.target = "_blank"; book.rel = "noopener"; }
+else book.href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent("Book a 30 min call");
 
-$("#socials").innerHTML = Object.entries(LINKS).filter(([, u]) => u)
-  .map(([n, u]) => `<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(n)}</a></li>`).join("");
+const ICONS = { // [filled?, drawing] for each logo
+  Email: [0, `<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>`],
+  LinkedIn: [0, `<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>`],
+  Instagram: [0, `<rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>`],
+  GitHub: [0, `<path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>`],
+  YouTube: [0, `<path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>`],
+  X: [1, `<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>`],
+  TikTok: [1, `<path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>`]
+};
+const ORDER = ["Email", "LinkedIn", "Instagram", "GitHub", "YouTube", "TikTok", "X", "Behance", "ArtStation"];
+const svgOf = ([filled, d]) => `<svg viewBox="0 0 24 24" ${filled ? 'fill="currentColor"' : 'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"'} aria-hidden="true">${d}</svg>`;
+const urls = { Email: "mailto:" + EMAIL, ...LINKS };
+$("#socials").innerHTML = ORDER.filter(n => urls[n]).map(n => {
+  const ext = n === "Email" ? "" : ' target="_blank" rel="noopener"';
+  return `<li><a class="ico${ICONS[n] ? "" : " txt"}" href="${esc(urls[n])}"${ext} aria-label="${esc(n)}" title="${esc(n)}">${ICONS[n] ? svgOf(ICONS[n]) : esc(n)}</a></li>`;
+}).join("");
 
-if (SHOWREEL) $("#reel").innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(SHOWREEL)}?rel=0" title="Showreel" allow="fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>`;
+const dvid = $("#dvid");
+function showFrame(on) { frame.hidden = !on; dvid.hidden = on; }
+if (SHOWREEL_FILE) {
+  $("#reel").innerHTML = `<video src="${esc(SHOWREEL_FILE)}" autoplay muted loop playsinline preload="auto" tabindex="-1" aria-hidden="true"></video>`;
+  $("#soon").hidden = true;
+  $("#reelBtn").hidden = false;
+  $("#reelBtn").addEventListener("click", () => { dlg.classList.remove("v"); showFrame(false); dvid.src = SHOWREEL_FILE; dlg.showModal(); dvid.play().catch(() => {}); });
+} else if (SHOWREEL) {
+  const id = encodeURIComponent(SHOWREEL);
+  $("#reel").innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1" title="Showreel" allow="autoplay; fullscreen" referrerpolicy="strict-origin-when-cross-origin" tabindex="-1" aria-hidden="true"></iframe>`;
+  $("#soon").hidden = true;
+  $("#reelBtn").hidden = false;
+  $("#reelBtn").addEventListener("click", () => { dlg.classList.remove("v"); showFrame(true); frame.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0"; dlg.showModal(); });
+}
 
 function render(cat) {
   const list = PROJECTS.map((p, i) => ({p, i})).filter(x => cat === "All" || x.p.cat === cat);
@@ -261,7 +343,7 @@ function showImg() {
 }
 function openProject(i) {
   const p = PROJECTS[i];
-  if (p.yt) { dlg.classList.toggle("v", !!p.vertical); frame.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(p.yt) + "?autoplay=1&rel=0"; dlg.showModal(); }
+  if (p.yt) { showFrame(true); dlg.classList.toggle("v", !!p.vertical); frame.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(p.yt) + "?autoplay=1&rel=0"; dlg.showModal(); }
   else if (p.link) window.open(p.link, "_blank", "noopener");
   else openGallery(i);
 }
@@ -302,8 +384,35 @@ lb.addEventListener("click", e => { if (e.target === lb) lb.close(); });
 lb.addEventListener("keydown", e => { if (gal.length > 1 && e.key === "ArrowLeft") step(-1); if (gal.length > 1 && e.key === "ArrowRight") step(1); });
 grid.addEventListener("click", e => { const mo = e.target.closest(".more"); if (mo) return openGallery(+mo.dataset.i); const t = e.target.closest("[role=button]"); if (t) openProject(+t.dataset.i); });
 grid.addEventListener("keydown", e => { if ((e.key === "Enter" || e.key === " ") && e.target.matches("[role=button]")) { e.preventDefault(); openProject(+e.target.dataset.i); } });
-dlg.addEventListener("close", () => { frame.src = ""; });
+dlg.addEventListener("close", () => { frame.src = ""; dvid.pause(); dvid.removeAttribute("src"); dvid.load(); });
 dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
+
+const form = $("#briefForm"), msg = $("#briefMsg"), sendBtn = $("#briefBtn");
+const budget = $("#f-bud"), custWrap = $("#custWrap"), cust = $("#f-cust");
+budget.addEventListener("change", () => {
+  const on = budget.value === "Custom amount";
+  custWrap.hidden = !on; cust.required = on;
+  if (on) cust.focus();
+});
+form.addEventListener("submit", async e => {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(form));
+  if (data.budget === "Custom amount") data.budget = "Custom: " + (data.custom_budget || "").trim();
+  delete data.custom_budget;
+  data._subject = "New brief from " + data.name;
+  data._template = "table";
+  sendBtn.disabled = true; sendBtn.textContent = "Sending…"; msg.textContent = "";
+  try {
+    const res = await fetch(FORM_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(data) });
+    const out = await res.json().catch(() => ({}));
+    if (!res.ok || out.success === "false" || out.success === false) throw new Error(out.message || "failed");
+    form.reset(); custWrap.hidden = true; cust.required = false;
+    msg.textContent = "Thank you. Your brief is on its way, and I’ll reply by email.";
+  } catch (err) {
+    msg.innerHTML = `Sorry, that didn’t send. Please email me directly at <a href="mailto:${EMAIL}">${EMAIL}</a>.`;
+  }
+  sendBtn.disabled = false; sendBtn.textContent = "Send brief";
+});
 </script>
 </body>
 </html>
