@@ -253,7 +253,7 @@ const LINKS = { // leave "" to hide a link
   ArtStation: "",
   GitHub: "https://github.com/FadyKhayat"
 };
-const SHOWREEL_FILE = ""; // Video file in the videos folder, e.g. "videos/showreel.mp4". Used instead of the YouTube ID below.
+const SHOWREEL_FILE = "videos/showreel.mp4"; // Video file in the videos folder, e.g. "videos/showreel.mp4". Used instead of the YouTube ID below.
 const SHOWREEL = ""; // YouTube video ID, e.g. "dQw4w9WgXcQ"
 const FORM_ENDPOINT = "https://formsubmit.co/ajax/" + EMAIL; // briefs are emailed to EMAIL
 const HERO = ["images/overgrown-can.jpg", "images/f40.jpg", "images/nike.jpg", "images/burger.jpg"]; // 4 images for the strip under your name
@@ -304,8 +304,6 @@ function showFrame(on) { frame.hidden = !on; dvid.hidden = on; }
 if (SHOWREEL_FILE) {
   $("#reel").innerHTML = `<video src="${esc(SHOWREEL_FILE)}" autoplay muted loop playsinline preload="auto" tabindex="-1" aria-hidden="true"></video>`;
   $("#soon").hidden = true;
-  $("#reelBtn").hidden = false;
-  $("#reelBtn").addEventListener("click", () => { dlg.classList.remove("v"); showFrame(false); dvid.src = SHOWREEL_FILE; dlg.showModal(); dvid.play().catch(() => {}); });
 } else if (SHOWREEL) {
   const id = encodeURIComponent(SHOWREEL);
   $("#reel").innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1" title="Showreel" allow="autoplay; fullscreen" referrerpolicy="strict-origin-when-cross-origin" tabindex="-1" aria-hidden="true"></iframe>`;
