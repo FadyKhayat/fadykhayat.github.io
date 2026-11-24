@@ -26,10 +26,12 @@ SETUP (everything you edit is in the script at the bottom, inside the EDIT HERE 
    Missing images show a dark placeholder.
 2. Add your YouTube, TikTok and X links in LINKS. Each link shows as a clickable icon (email too). Empty ones are hidden.
 3. For each project add a YouTube video ID (yt) or any page link (link). Leave both empty and clicking the tile opens the full image.
-   Extra images are found automatically: name them like the main image plus -2, -3, -4 (sci-fi-street-2.jpg, sci-fi-street-3.jpg). vertical:true makes a YouTube Short play tall.
-4. Showreel: paste a YouTube video ID into SHOWREEL. It plays muted behind your name at the top, with a "Watch with sound" button.
-5. Brief form: the first time anyone sends a brief, FormSubmit emails you a link to confirm your address. Click it once (check spam). Test only on the live site.
-6. Book a call: paste your Calendly or Cal.com link into BOOKING. Until then the button opens an email to you.
+   Extra images are found automatically: name them like the main image plus -2, -3, -4 (sci-fi-street-2.jpg). vertical:true makes a YouTube Short play tall.
+4. Video tiles: the cover is the project image. A silent preview clip is found automatically in the videos folder, named like the image
+   plus -preview.mp4 (images/nike.jpg -> videos/nike-preview.mp4). No clip? The tile just shows its cover. Clicking plays the YouTube video with sound.
+5. Showreel: videos/showreel.mp4 (optional poster: images/showreel-poster.jpg). Or paste a YouTube video ID into SHOWREEL.
+6. Brief form: the first time anyone sends a brief, FormSubmit emails you a link to confirm your address. Click it once (check spam).
+7. Book a call: paste your Calendly, Cal.com or Google Calendar link into BOOKING.
 -->
 <style>
 :root{--sec:clamp(4rem,9vw,7rem);--bg:#0a0a0b;--text:#f2f2f0;--muted:#9a9a9f;--line:#2a2a2e;--pad:clamp(1rem,4vw,3rem);color-scheme:dark}
@@ -65,14 +67,10 @@ dialog video{display:block;width:100%;height:100%;background:#000}
 .btn.solid:hover{background:transparent;color:var(--text)}
 
 .tile{display:block;aspect-ratio:var(--r,4/5);background:var(--img,linear-gradient(#0000,#0000)) center/cover,linear-gradient(160deg,#26262b,#141416)}
-.tile[role=button]{cursor:pointer;transition:filter .3s}
-.tile[role=button]:hover{filter:brightness(1.18)}
-.grid{display:grid;gap:6px;padding:0 var(--pad)}
-.grid{display:flex;flex-wrap:wrap;justify-content:center;gap:3.5rem 10px;--r:16/9}
+.grid{display:flex;flex-wrap:wrap;justify-content:center;gap:3.5rem 10px;padding:0 var(--pad);--r:16/9}
 .grid .wide{flex:0 0 100%;--r:21/9}
 .grid .vcard{flex:0 0 calc(33.333% - 6.67px);--r:3/4}
 .card{margin:0;min-width:0;flex:0 0 calc(50% - 5px)}
-.card[hidden]{display:none}
 .card figcaption{padding:.9rem 0 0;text-align:center}
 .card h3{margin:0;font-size:1.15rem;font-weight:700;line-height:1.3}
 .card .lab{display:block;margin:.2rem 0 .4rem;color:var(--muted)}
@@ -85,8 +83,10 @@ dialog video{display:block;width:100%;height:100%;background:#000}
 .filters button:focus-visible{outline:2px solid var(--text);outline-offset:3px}
 
 .pic{position:relative;display:block;aspect-ratio:var(--r,16/9);overflow:hidden;background:var(--bg);cursor:pointer}
-.pic iframe{position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:none;background:var(--bg)}
 .pic img{position:relative;display:block;width:100%;height:100%;object-fit:contain;transition:filter .3s}
+.vcard .pic img{object-fit:cover}
+.pic video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s;pointer-events:none}
+.pic video.on{opacity:1}
 .pic:hover img{filter:brightness(1.12)}
 .pic .cta{position:absolute;right:.75rem;bottom:.75rem;z-index:1;padding:.35rem .7rem;background:rgba(10,10,11,.75);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase}
 .block{padding:var(--sec) var(--pad) 0}
@@ -96,9 +96,6 @@ dialog video{display:block;width:100%;height:100%;background:#000}
 .center p{max-width:58ch;margin:0 auto 1.25rem;color:var(--muted)}
 .svc{margin:0 0 1rem;font-size:clamp(1.1rem,2.6vw,1.6rem);font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--text)!important}
 .svc span{margin:0 .9rem;color:var(--muted)}
-.reel{position:relative;aspect-ratio:16/9;display:grid;place-items:center;background:#18181b;color:var(--muted)}
-.reel iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.reelwrap{padding:0 var(--pad)}
 .sub{margin-bottom:1.5rem;padding:0 var(--pad);text-align:center}
 .sub h2{font-size:clamp(2.5rem,7vw,5rem)}
 
@@ -106,7 +103,6 @@ dialog video{display:block;width:100%;height:100%;background:#000}
 .about h2{font-size:clamp(3rem,8vw,6rem);margin-bottom:1.5rem}
 .about p{max-width:62ch;margin:0 0 1.25rem;color:var(--muted)}
 
-.mail{font-size:clamp(1.25rem,3vw,2rem);font-weight:700;font-stretch:90%;overflow-wrap:anywhere}
 .icons{display:flex;flex-wrap:wrap;justify-content:center;gap:.75rem;list-style:none;margin:1.25rem 0 0;padding:0}
 .ico{display:inline-grid;place-items:center;width:46px;height:46px;border:1px solid var(--line);border-radius:50%;color:var(--text);text-decoration:none;transition:background .2s,color .2s}
 .ico svg{width:20px;height:20px}
@@ -147,7 +143,46 @@ dialog.v{width:auto;height:min(88vh,calc(94vw*16/9));aspect-ratio:9/16}
 .lbnav{position:absolute;top:50%;transform:translateY(-50%);font-size:2.5rem;line-height:1;padding:.5rem 1rem;background:rgba(10,10,11,.6)}
 #prev{left:0}
 #next{right:0}
-@media (max-width:760px){.grid .wide{--r:16/9}.card,.grid .wide,.grid .vcard{flex-basis:100%}.about{grid-template-columns:1fr}.about .tile{max-width:260px}.stage{height:auto;background:none}.vid{position:relative;aspect-ratio:16/9;background:linear-gradient(160deg,#26262b,#141416)}.stage::after{display:none}.stage .in{position:static;padding:1.25rem var(--pad) 0}.hero h1{font-size:clamp(3rem,16vw,5rem)}.fields{grid-template-columns:1fr}.top nav{gap:1rem}}
+
+/* phone: same layout as desktop, scaled down */
+@media (max-width:760px){
+:root{--pad:.85rem;--sec:3rem}
+.top{padding:.8rem var(--pad)}
+.brand{font-size:1.05rem}
+.top nav{gap:.7rem}
+.top nav a{font-size:.6rem;letter-spacing:.06em}
+.stage .in{padding-bottom:.65rem}
+.stage .soon{top:3rem;right:.85rem;font-size:.55rem}
+.hero h1{font-size:clamp(1.9rem,9.5vw,3rem);margin-bottom:.5rem}
+.btns{gap:.35rem}
+.btn{padding:.45rem .65rem;font-size:.56rem;letter-spacing:.08em}
+.filters{gap:.4rem 1rem;margin:1rem 0 1.25rem}
+.filters button{font-size:.62rem;letter-spacing:.08em}
+.grid{gap:1.75rem 6px}
+.card{flex-basis:calc(50% - 3px)}
+.grid .vcard{flex-basis:calc(33.333% - 4px)}
+.grid .wide{--r:16/9}
+.card figcaption{padding-top:.5rem}
+.card h3{font-size:.8rem}
+.card .lab{font-size:.52rem;letter-spacing:.08em;margin:.1rem 0 .25rem}
+.card p{font-size:.64rem;line-height:1.4}
+.more{font-size:.54rem;margin-top:.4rem}
+.pic .cta{font-size:.48rem;padding:.2rem .4rem;right:.35rem;bottom:.35rem;letter-spacing:.08em}
+.center h2,.sub h2,.about h2,.brief h2{font-size:2rem;margin-bottom:.9rem}
+.svc{font-size:.78rem;margin-bottom:.7rem}
+.svc span{margin:0 .45rem}
+.about{grid-template-columns:34% 1fr;gap:1rem}
+.about p{font-size:.76rem;line-height:1.5;margin-bottom:.8rem}
+.brief>p{font-size:.8rem;margin-bottom:1.25rem}
+.fields{gap:.8rem .7rem}
+.fld label{font-size:.58rem;letter-spacing:.08em}
+.fld input,.fld select,.fld textarea{font-size:16px;padding:.55rem .65rem}
+.reply{font-size:.7rem}
+.ico{width:38px;height:38px}
+.ico svg{width:17px;height:17px}
+.foot strong{font-size:1.1rem}
+.foot{font-size:.7rem}
+}
 </style>
 </head>
 <body>
@@ -248,7 +283,7 @@ dialog.v{width:auto;height:min(88vh,calc(94vw*16/9));aspect-ratio:9/16}
 <script>
 /* ===== EDIT HERE ===== */
 const EMAIL = "fadykhayat8@gmail.com";
-const BOOKING = "https://calendar.app.google/EuFAStG4nJydsruM9"; // Calendly or Cal.com link for the "Book a 30 min call" button. Empty = opens an email to you instead.
+const BOOKING = "https://calendar.app.google/EuFAStG4nJydsruM9"; // Calendly, Cal.com or Google Calendar link for the "Book a 30 min call" button. Empty = opens an email to you instead.
 const LINKS = { // leave "" to hide a link
   WhatsApp: "https://wa.me/96170872985?text=" + encodeURIComponent("Hi Fady, I saw your portfolio and I’d like to talk about a project."),
   LinkedIn: "https://www.linkedin.com/in/fadykhayat/",
@@ -260,10 +295,10 @@ const LINKS = { // leave "" to hide a link
   ArtStation: "",
   GitHub: ""
 };
-const SHOWREEL_FILE = "videos/showreel.mp4"; // Video file in the videos folder, e.g. "videos/showreel.mp4". Used instead of the YouTube ID below.
+const SHOWREEL_FILE = "videos/showreel.mp4"; // Video file in the videos folder. Used instead of the YouTube ID below.
 const SHOWREEL = ""; // YouTube video ID, e.g. "dQw4w9WgXcQ"
 const FORM_ENDPOINT = "https://formsubmit.co/ajax/" + EMAIL; // briefs are emailed to EMAIL
-// img = file in the images folder. yt = YouTube video ID (opens in a pop-up). link = page to open (tour, Behance, Upwork).
+// img = cover image in the images folder. yt = YouTube video ID (opens in a pop-up with sound). link = page to open (tour, Behance).
 const PROJECTS = [
   {title:"Sci-fi city street", cat:"Environments", desc:"A cinematic street scene built around lighting, atmosphere and a small story, shown with clay breakdowns.", img:"images/sci-fi-street.jpg", yt:"", link:""},
   {title:"F40 in the garage", cat:"Product CGI", desc:"A white F40 in a dark garage, animated to Under Vato’s “Me Fume Un Gallito”.", img:"images/f40.jpg", yt:"", link:""},
@@ -311,20 +346,23 @@ function showFrame(on) { frame.hidden = !on; dvid.hidden = on; }
 if (SHOWREEL_FILE) {
   $("#reel").innerHTML = `<video src="${esc(SHOWREEL_FILE)}" poster="images/showreel-poster.jpg" autoplay muted loop playsinline preload="auto" tabindex="-1" aria-hidden="true"></video>`;
   $("#soon").hidden = true;
+  $("#reelBtn").hidden = false;
+  $("#reelBtn").addEventListener("click", () => { dlg.classList.remove("v"); showFrame(false); dvid.src = SHOWREEL_FILE; dlg.showModal(); dvid.play().catch(() => {}); });
 } else if (SHOWREEL) {
   const id = encodeURIComponent(SHOWREEL);
-  $("#reel").innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1" title="Showreel" allow="autoplay; fullscreen" referrerpolicy="strict-origin-when-cross-origin" tabindex="-1" aria-hidden="true"></iframe>`;
+  $("#reel").innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1&cc_load_policy=0" title="Showreel" allow="autoplay; fullscreen" referrerpolicy="strict-origin-when-cross-origin" tabindex="-1" aria-hidden="true"></iframe>`;
   $("#soon").hidden = true;
   $("#reelBtn").hidden = false;
-  $("#reelBtn").addEventListener("click", () => { dlg.classList.remove("v"); showFrame(true); frame.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0"; dlg.showModal(); });
+  $("#reelBtn").addEventListener("click", () => { dlg.classList.remove("v"); showFrame(true); frame.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0&cc_load_policy=0"; dlg.showModal(); });
 }
 
-const pvObs = "IntersectionObserver" in window ? new IntersectionObserver(es => es.forEach(e => { // previews play only while on screen, always muted
-  const f = e.target;
-  if (e.isIntersecting) { if (f.getAttribute("src") !== f.dataset.src) f.src = f.dataset.src; }
-  else if (f.getAttribute("src") !== "about:blank") f.src = "about:blank";
-}), {rootMargin: "200px"}) : null;
+const pvObs = "IntersectionObserver" in window ? new IntersectionObserver(es => es.forEach(e => { // previews play only while on screen
+  const v = e.target;
+  if (e.isIntersecting) { if (!v.getAttribute("src")) v.src = v.dataset.src; v.play().catch(() => {}); }
+  else v.pause();
+}), {rootMargin: "80px", threshold: .25}) : null;
 const kind = p => p.yt ? 1 : p.link ? 2 : 0; // 0 = image, 1 = video, 2 = VR tour
+const previewOf = p => p.preview || p.img.replace(/^images\//, "videos/").replace(/\.[a-z0-9]+$/i, "-preview.mp4");
 function render(cat) {
   const list = PROJECTS.map((p, i) => ({p, i})).filter(x => cat === "All" || x.p.cat === cat)
     .sort((a, b) => kind(a.p) - kind(b.p)); // images first, then videos, then VR tours
@@ -336,10 +374,16 @@ function render(cat) {
     if (p.vertical) cls += " vcard";
     else { if (flat[g] % 2 === 1 && seen[g] === 0) cls += " wide"; seen[g]++; }
     const cta = p.yt ? "Play video" : p.link ? "Open" : "View";
-    const tile = `<div class="pic" role="button" tabindex="0" data-i="${i}" aria-label="${cta}: ${esc(p.title)}" style="--img:url(${esc(p.img)})"><img src="${esc(p.img)}" alt="" loading="lazy" onerror="this.remove()">${p.yt ? `<iframe class="pv" data-src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(p.yt)}?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=${encodeURIComponent(p.yt)}&amp;controls=0&amp;modestbranding=1&amp;playsinline=1&amp;rel=0&amp;disablekb=1" title="" tabindex="-1" aria-hidden="true" allow="autoplay" referrerpolicy="strict-origin-when-cross-origin"></iframe>` : ""}<span class="cta">${cta}</span></div>`;
+    const pv = p.yt ? `<video class="pv" data-src="${esc(previewOf(p))}" poster="${esc(p.img)}" muted loop playsinline preload="none" tabindex="-1" aria-hidden="true"></video>` : "";
+    const tile = `<div class="pic" role="button" tabindex="0" data-i="${i}" aria-label="${cta}: ${esc(p.title)}"><img src="${esc(p.img)}" alt="" loading="lazy" onerror="this.remove()">${pv}<span class="cta">${cta}</span></div>`;
     return `<figure class="${cls}">${tile}<figcaption><h3>${esc(p.title)}</h3><span class="lab">${esc(p.cat)}</span><p>${esc(p.desc)}</p></figcaption></figure>`;
   }).join("");
-  grid.querySelectorAll("iframe.pv").forEach(f => { if (pvObs) pvObs.observe(f); else f.src = f.dataset.src; });
+  grid.querySelectorAll("video.pv").forEach(v => {
+    v.muted = true;
+    v.addEventListener("playing", () => v.classList.add("on"));
+    v.addEventListener("error", () => v.remove()); // no clip yet: the cover image stays
+    if (pvObs) pvObs.observe(v); else { v.src = v.dataset.src; v.play().catch(() => {}); }
+  });
   decorate();
 }
 const cats = ["All", ...new Set(PROJECTS.map(p => p.cat))];
@@ -360,7 +404,7 @@ function showImg() {
 }
 function openProject(i) {
   const p = PROJECTS[i];
-  if (p.yt) { showFrame(true); dlg.classList.toggle("v", !!p.vertical); frame.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(p.yt) + "?autoplay=1&rel=0"; dlg.showModal(); }
+  if (p.yt) { showFrame(true); dlg.classList.toggle("v", !!p.vertical); frame.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(p.yt) + "?autoplay=1&rel=0&cc_load_policy=0"; dlg.showModal(); }
   else if (p.link) window.open(p.link, "_blank", "noopener");
   else openGallery(i);
 }
