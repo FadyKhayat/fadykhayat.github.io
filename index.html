@@ -3,17 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Fady Khayat | 3D artist for product CGI, FOOH ads and VR</title>
-<meta name="description" content="Fady Khayat is a 3D artist in Beirut making product CGI, FOOH and VFX ads, and VR virtual tours in Blender.">
-<meta property="og:title" content="Fady Khayat | 3D artist">
-<meta property="og:description" content="Product CGI, FOOH and VFX ads, and VR virtual tours.">
+<title>Fady Khayat | 3D Artist &amp; Creative Director</title>
+<meta name="description" content="Fady Khayat is a 3D Artist &amp; Creative Director in Beirut, making product CGI, FOOH and VFX ads, and virtual tours.">
+<meta property="og:title" content="Fady Khayat | 3D Artist &amp; Creative Director">
+<meta property="og:description" content="Product CGI, FOOH and VFX ads, and virtual tours.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://fadykhayat.art/">
 <meta property="og:image" content="https://fadykhayat.art/images/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Fady Khayat, 3D artist: product CGI, FOOH and VFX ads, and VR virtual tours">
+<meta property="og:image:alt" content="Fady Khayat, 3D Artist &amp; Creative Director">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Fady Khayat | 3D Artist &amp; Creative Director">
 <meta name="twitter:image" content="https://fadykhayat.art/images/og-image.jpg">
 <link rel="canonical" href="https://fadykhayat.art/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a0a0b'/%3E%3Ctext x='50' y='68' font-size='54' font-family='Arial' font-weight='700' fill='white' text-anchor='middle'%3EFK%3C/text%3E%3C/svg%3E">
@@ -27,8 +28,8 @@ SETUP (everything you edit is in the script at the bottom, inside the EDIT HERE 
 2. Add your YouTube, TikTok and X links in LINKS. Each link shows as a clickable icon (email too). Empty ones are hidden.
 3. For each project add a YouTube video ID (yt) or any page link (link). Leave both empty and clicking the tile opens the full image.
    Extra images are found automatically: name them like the main image plus -2, -3, -4 (sci-fi-street-2.jpg). vertical:true makes a YouTube Short play tall.
-4. Video tiles: the cover is the project image. A silent preview clip is found automatically in the videos folder, named like the image
-   plus -preview.mp4 (images/nike.jpg -> videos/nike-preview.mp4). No clip? The tile just shows its cover. Clicking plays the YouTube video with sound.
+4. Video tiles: the cover image shows first. While a tile is on screen, a silent looping YouTube preview plays over it (it loads only then, to save data).
+   Clicking the tile opens the YouTube video with sound.
 5. Showreel: videos/showreel.mp4 (optional poster: images/showreel-poster.jpg). Or paste a YouTube video ID into SHOWREEL.
 6. Brief form: the first time anyone sends a brief, FormSubmit emails you a link to confirm your address. Click it once (check spam).
 7. Book a call: paste your Calendly, Cal.com or Google Calendar link into BOOKING.
@@ -56,7 +57,6 @@ h1,h2,.brand{margin:0;font-weight:800;font-stretch:62%;text-transform:uppercase;
 .vid{position:absolute;inset:0}
 .vid iframe{width:100%;height:100%;border:0;pointer-events:none}
 .vid video{display:block;width:100%;height:100%;object-fit:cover;pointer-events:none}
-dialog video{display:block;width:100%;height:100%;background:#000}
 .stage .in{position:absolute;inset:auto 0 0 0;z-index:1;padding:0 var(--pad) clamp(1.25rem,3vw,2.5rem)}
 .stage .soon{position:absolute;top:1rem;right:1rem;z-index:1;color:var(--muted)}
 .hero h1{font-size:clamp(3rem,11vw,10rem);margin-bottom:1.25rem}
@@ -83,12 +83,13 @@ dialog video{display:block;width:100%;height:100%;background:#000}
 .filters button:focus-visible{outline:2px solid var(--text);outline-offset:3px}
 
 .pic{position:relative;display:block;aspect-ratio:var(--r,16/9);overflow:hidden;background:var(--bg);cursor:pointer}
-.pic img{position:relative;display:block;width:100%;height:100%;object-fit:contain;transition:filter .3s}
+.pic iframe{position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:none;background:var(--bg)}
+.vcard .pic iframe{height:133.34%;top:-16.67%;bottom:auto}
+.pic img{position:relative;z-index:1;display:block;width:100%;height:100%;object-fit:contain;transition:filter .3s,opacity .5s}
 .vcard .pic img{object-fit:cover}
-.pic video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s;pointer-events:none}
-.pic video.on{opacity:1}
+.pic iframe.on + img{opacity:0}
 .pic:hover img{filter:brightness(1.12)}
-.pic .cta{position:absolute;right:.75rem;bottom:.75rem;z-index:1;padding:.35rem .7rem;background:rgba(10,10,11,.75);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase}
+.pic .cta{position:absolute;z-index:2;right:.75rem;bottom:.75rem;padding:.35rem .7rem;background:rgba(10,10,11,.75);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase}
 .block{padding:var(--sec) var(--pad) 0}
 .center{text-align:center}
 .center p:last-child{margin-bottom:0}
@@ -205,7 +206,6 @@ dialog.v{width:auto;height:min(88vh,calc(94vw*16/9));aspect-ratio:9/16}
         <h1>Fady<br>Khayat</h1>
         <div class="btns">
           <a class="btn solid" href="#work">View work</a>
-          <button class="btn" id="reelBtn" type="button" hidden>Watch with sound</button>
           <a class="btn" href="#brief">Send a brief</a>
           <a class="btn bookLink" href="#">Book a call</a>
         </div>
@@ -277,7 +277,7 @@ dialog.v{width:auto;height:min(88vh,calc(94vw*16/9));aspect-ratio:9/16}
   </div>
 </footer>
 
-<dialog id="dlg"><form method="dialog"><button aria-label="Close video">Close</button></form><iframe id="frame" title="Project video" allow="autoplay; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe><video id="dvid" controls playsinline hidden></video></dialog>
+<dialog id="dlg"><form method="dialog"><button aria-label="Close video">Close</button></form><iframe id="frame" title="Project video" allow="autoplay; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></dialog>
 <dialog id="lb"><form method="dialog"><button aria-label="Close image">Close</button></form><button class="lbnav" id="prev" aria-label="Previous image">‹</button><button class="lbnav" id="next" aria-label="Next image">›</button><img id="lbimg" alt=""><div id="lbcap"></div></dialog>
 
 <script>
@@ -341,28 +341,33 @@ $("#socials").innerHTML = ORDER.filter(n => urls[n]).map(n => {
   return `<li><a class="ico${ICONS[n] ? "" : " txt"}" href="${esc(urls[n])}"${ext} aria-label="${esc(n)}" title="${esc(n)}">${ICONS[n] ? svgOf(ICONS[n]) : esc(n)}</a></li>`;
 }).join("");
 
-const dvid = $("#dvid");
-function showFrame(on) { frame.hidden = !on; dvid.hidden = on; }
-if (SHOWREEL_FILE) {
+if (SHOWREEL_FILE) { // silent looping showreel; the poster image shows until it plays
   $("#reel").innerHTML = `<video src="${esc(SHOWREEL_FILE)}" poster="images/showreel-poster.jpg" autoplay muted loop playsinline preload="auto" tabindex="-1" aria-hidden="true"></video>`;
   $("#soon").hidden = true;
-  $("#reelBtn").hidden = false;
-  $("#reelBtn").addEventListener("click", () => { dlg.classList.remove("v"); showFrame(false); dvid.src = SHOWREEL_FILE; dlg.showModal(); dvid.play().catch(() => {}); });
 } else if (SHOWREEL) {
   const id = encodeURIComponent(SHOWREEL);
   $("#reel").innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1&cc_load_policy=0" title="Showreel" allow="autoplay; fullscreen" referrerpolicy="strict-origin-when-cross-origin" tabindex="-1" aria-hidden="true"></iframe>`;
   $("#soon").hidden = true;
-  $("#reelBtn").hidden = false;
-  $("#reelBtn").addEventListener("click", () => { dlg.classList.remove("v"); showFrame(true); frame.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0&cc_load_policy=0"; dlg.showModal(); });
 }
 
-const pvObs = "IntersectionObserver" in window ? new IntersectionObserver(es => es.forEach(e => { // previews play only while on screen
-  const v = e.target;
-  if (e.isIntersecting) { if (!v.getAttribute("src")) v.src = v.dataset.src; v.play().catch(() => {}); }
-  else v.pause();
+// Video tiles: the cover image shows first. A muted, looping YouTube preview sits underneath and loads only while the tile is on screen.
+// When YouTube reports the preview is really playing, the cover fades away. Clicking the tile opens the video with sound.
+const ytEmbed = id => "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(id) + "?autoplay=1&mute=1&loop=1&playlist=" + encodeURIComponent(id) + "&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1&fs=0&iv_load_policy=3&cc_load_policy=0&enablejsapi=1" + (location.protocol.indexOf("http") === 0 ? "&origin=" + encodeURIComponent(location.origin) : "");
+const pvObs = "IntersectionObserver" in window ? new IntersectionObserver(es => es.forEach(e => {
+  const f = e.target;
+  if (e.isIntersecting) { if (f.getAttribute("src") !== f.dataset.src) f.src = f.dataset.src; }
+  else { f.classList.remove("on"); if (f.getAttribute("src") !== "about:blank") f.src = "about:blank"; }
 }), {rootMargin: "80px", threshold: .25}) : null;
+window.addEventListener("message", e => {
+  if (String(e.origin).indexOf("youtube") < 0) return;
+  let d; try { d = typeof e.data === "string" ? JSON.parse(e.data) : e.data; } catch (_) { return; }
+  const playing = d && ((d.event === "onStateChange" && d.info === 1) || (d.event === "infoDelivery" && d.info && (d.info.playerState === 1 || d.info.currentTime > 0)));
+  if (!playing) return;
+  const f = [...grid.querySelectorAll("iframe.pv")].find(x => x.contentWindow === e.source);
+  if (f && f.getAttribute("src") !== "about:blank") f.classList.add("on");
+});
+
 const kind = p => p.yt ? 1 : p.link ? 2 : 0; // 0 = image, 1 = video, 2 = VR tour
-const previewOf = p => p.preview || p.img.replace(/^images\//, "videos/").replace(/\.[a-z0-9]+$/i, "-preview.mp4");
 function render(cat) {
   const list = PROJECTS.map((p, i) => ({p, i})).filter(x => cat === "All" || x.p.cat === cat)
     .sort((a, b) => kind(a.p) - kind(b.p)); // images first, then videos, then VR tours
@@ -374,15 +379,17 @@ function render(cat) {
     if (p.vertical) cls += " vcard";
     else { if (flat[g] % 2 === 1 && seen[g] === 0) cls += " wide"; seen[g]++; }
     const cta = p.yt ? "Play video" : p.link ? "Open" : "View";
-    const pv = p.yt ? `<video class="pv" data-src="${esc(previewOf(p))}" poster="${esc(p.img)}" muted loop playsinline preload="none" tabindex="-1" aria-hidden="true"></video>` : "";
-    const tile = `<div class="pic" role="button" tabindex="0" data-i="${i}" aria-label="${cta}: ${esc(p.title)}"><img src="${esc(p.img)}" alt="" loading="lazy" onerror="this.remove()">${pv}<span class="cta">${cta}</span></div>`;
+    const pv = p.yt ? `<iframe class="pv" data-src="${esc(ytEmbed(p.yt))}" title="" tabindex="-1" aria-hidden="true" allow="autoplay" referrerpolicy="strict-origin-when-cross-origin"></iframe>` : "";
+    const tile = `<div class="pic" role="button" tabindex="0" data-i="${i}" aria-label="${cta}: ${esc(p.title)}">${pv}<img src="${esc(p.img)}" alt="" loading="lazy" onerror="this.remove()"><span class="cta">${cta}</span></div>`;
     return `<figure class="${cls}">${tile}<figcaption><h3>${esc(p.title)}</h3><span class="lab">${esc(p.cat)}</span><p>${esc(p.desc)}</p></figcaption></figure>`;
   }).join("");
-  grid.querySelectorAll("video.pv").forEach(v => {
-    v.muted = true;
-    v.addEventListener("playing", () => v.classList.add("on"));
-    v.addEventListener("error", () => v.remove()); // no clip yet: the cover image stays
-    if (pvObs) pvObs.observe(v); else { v.src = v.dataset.src; v.play().catch(() => {}); }
+  grid.querySelectorAll("iframe.pv").forEach(f => {
+    f.addEventListener("load", () => {
+      if (f.getAttribute("src") !== f.dataset.src) return;
+      const ping = () => { try { f.contentWindow.postMessage(JSON.stringify({event: "listening", id: 1, channel: "widget"}), "*"); } catch (_) {} };
+      ping(); setTimeout(ping, 700); setTimeout(ping, 2000);
+    });
+    if (pvObs) pvObs.observe(f); else f.src = f.dataset.src;
   });
   decorate();
 }
@@ -404,7 +411,7 @@ function showImg() {
 }
 function openProject(i) {
   const p = PROJECTS[i];
-  if (p.yt) { showFrame(true); dlg.classList.toggle("v", !!p.vertical); frame.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(p.yt) + "?autoplay=1&rel=0&cc_load_policy=0"; dlg.showModal(); }
+  if (p.yt) { dlg.classList.toggle("v", !!p.vertical); frame.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(p.yt) + "?autoplay=1&rel=0&cc_load_policy=0"; dlg.showModal(); }
   else if (p.link) window.open(p.link, "_blank", "noopener");
   else openGallery(i);
 }
@@ -445,7 +452,7 @@ lb.addEventListener("click", e => { if (e.target === lb) lb.close(); });
 lb.addEventListener("keydown", e => { if (gal.length > 1 && e.key === "ArrowLeft") step(-1); if (gal.length > 1 && e.key === "ArrowRight") step(1); });
 grid.addEventListener("click", e => { const mo = e.target.closest(".more"); if (mo) return openGallery(+mo.dataset.i); const t = e.target.closest("[role=button]"); if (t) openProject(+t.dataset.i); });
 grid.addEventListener("keydown", e => { if ((e.key === "Enter" || e.key === " ") && e.target.matches("[role=button]")) { e.preventDefault(); openProject(+e.target.dataset.i); } });
-dlg.addEventListener("close", () => { frame.src = ""; dvid.pause(); dvid.removeAttribute("src"); dvid.load(); });
+dlg.addEventListener("close", () => { frame.src = ""; });
 dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
 
 const form = $("#briefForm"), msg = $("#briefMsg"), sendBtn = $("#briefBtn");
