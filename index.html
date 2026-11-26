@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fady Khayat | 3D Artist &amp; Creative Director</title>
-<meta name="description" content="Fady Khayat is a 3D Artist and Creative Director in Beirut, making product CGI, FOOH and VFX ads, and virtual tours.">
+<meta name="description" content="Fady Khayat is a 3D Artist and Creative Director based in Beirut, Lebanon, making product CGI, FOOH and VFX ads, and virtual tours worldwide.">
 <meta property="og:title" content="Fady Khayat | 3D Artist &amp; Creative Director">
 <meta property="og:description" content="Product CGI, FOOH and VFX ads, and virtual tours.">
 <meta property="og:type" content="website">
@@ -147,7 +147,9 @@ dialog form{position:absolute;top:-2.5rem;right:0}
 dialog button{all:unset;cursor:pointer;color:#fff;font-size:.8125rem;letter-spacing:.14em;text-transform:uppercase;padding:.5rem .25rem}
 dialog.v{width:auto;height:min(88vh,calc(94vw*16/9));aspect-ratio:9/16}
 #lb{width:auto;max-width:96vw;aspect-ratio:auto;background:transparent;overflow:visible}
-#lb img{display:block;max-width:94vw;max-height:78vh;margin:0 auto;object-fit:contain}
+#lb img{display:block;max-width:94vw;max-height:78vh;margin:0 auto;object-fit:contain;transition:opacity .2s}
+#lb{touch-action:pan-y pinch-zoom}
+#lb.loading img{opacity:.35}
 #lbcap{padding-top:.75rem;color:var(--text);font-size:.95rem;text-align:center}
 .lbnav{position:absolute;top:50%;transform:translateY(-50%);font-size:2.5rem;line-height:1;padding:.5rem 1rem;background:rgba(10,10,11,.6)}
 #prev{left:0}
@@ -406,10 +408,16 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden) kick
 // Video tiles: the cover image shows first. A muted, looping YouTube preview sits underneath and loads only while the tile is on screen.
 // When YouTube reports the preview is really playing, the cover fades away. Clicking the tile opens the video with sound.
 const ytEmbed = id => "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(id) + "?autoplay=1&mute=1&loop=1&playlist=" + encodeURIComponent(id) + "&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1&fs=0&iv_load_policy=3&cc_load_policy=0&enablejsapi=1" + (location.protocol.indexOf("http") === 0 ? "&origin=" + encodeURIComponent(location.origin) : "");
+function startPv(f) { // a preview starts only after its cover image has loaded, so previews never slow the images down
+  const img = f.nextElementSibling;
+  const go = () => { if (f.dataset.vis === "1" && f.getAttribute("src") !== f.dataset.src) f.src = f.dataset.src; };
+  if (img && img.tagName === "IMG" && !img.complete) { img.addEventListener("load", go, {once: true}); img.addEventListener("error", go, {once: true}); }
+  else go();
+}
 const pvObs = "IntersectionObserver" in window ? new IntersectionObserver(es => es.forEach(e => {
   const f = e.target;
-  if (e.isIntersecting) { if (f.getAttribute("src") !== f.dataset.src) f.src = f.dataset.src; }
-  else { f.classList.remove("on"); if (f.getAttribute("src") !== "about:blank") f.src = "about:blank"; }
+  if (e.isIntersecting) { f.dataset.vis = "1"; startPv(f); }
+  else { f.dataset.vis = "0"; f.classList.remove("on"); if (f.getAttribute("src") !== "about:blank") f.src = "about:blank"; }
 }), {rootMargin: "80px", threshold: .25}) : null;
 window.addEventListener("message", e => {
   if (String(e.origin).indexOf("youtube") < 0) return;
@@ -433,7 +441,7 @@ function render(cat) {
     else { if (flat[g] % 2 === 1 && seen[g] === 0) cls += " wide"; seen[g]++; }
     const cta = p.yt ? "Play video" : p.link ? "Open" : "View";
     const pv = p.yt ? `<iframe class="pv" data-src="${esc(ytEmbed(p.yt))}" title="" tabindex="-1" aria-hidden="true" allow="autoplay" referrerpolicy="strict-origin-when-cross-origin"></iframe>` : "";
-    const tile = `<div class="pic" role="button" tabindex="0" data-i="${i}" aria-label="${cta}: ${esc(p.title)}">${pv}<img src="${esc(p.img)}" alt="" loading="lazy" onerror="this.remove()"><span class="cta">${cta}</span></div>`;
+    const tile = `<div class="pic" role="button" tabindex="0" data-i="${i}" aria-label="${cta}: ${esc(p.title)}">${pv}<img src="${esc(p.img)}" alt="${esc(p.title + ", " + p.cat + " by Fady Khayat")}" loading="lazy" decoding="async" onerror="this.remove()"><span class="cta">${cta}</span></div>`;
     return `<figure class="${cls}">${tile}<figcaption><h3>${esc(p.title)}</h3><span class="lab">${esc(p.cat)}</span><p>${esc(p.desc)}</p></figcaption></figure>`;
   }).join("");
   grid.querySelectorAll("iframe.pv").forEach(f => {
@@ -442,7 +450,7 @@ function render(cat) {
       const ping = () => { try { f.contentWindow.postMessage(JSON.stringify({event: "listening", id: 1, channel: "widget"}), "*"); } catch (_) {} };
       ping(); setTimeout(ping, 700); setTimeout(ping, 2000);
     });
-    if (pvObs) pvObs.observe(f); else f.src = f.dataset.src;
+    if (pvObs) pvObs.observe(f); else { f.dataset.vis = "1"; startPv(f); }
   });
   decorate();
 }
@@ -458,11 +466,19 @@ setTimeout(() => PROJECTS.forEach(p => findMore(p)), 600);
 
 const lb = $("#lb"), lbimg = $("#lbimg"), lbcap = $("#lbcap"), prevB = $("#prev"), nextB = $("#next");
 let gal = [], gi = 0, gp = null;
+let showTok = 0;
+const pre = u => { if (u) { const im = new Image(); im.decoding = "async"; im.src = u; } };
 function showImg() {
-  lbimg.src = gal[gi]; lbimg.alt = gp.title;
-  lbcap.textContent = gp.title + (gal.length > 1 ? "  (" + (gi + 1) + " of " + gal.length + ")" : "");
+  const tok = ++showTok, url = gal[gi];
+  const count = gal.length > 1 ? "  (" + (gi + 1) + " of " + gal.length + ")" : "";
   prevB.style.display = nextB.style.display = gal.length < 2 ? "none" : "";
-  const nx = gal[(gi + 1) % gal.length]; if (nx && nx !== gal[gi]) new Image().src = nx; // next image loads ahead of the swipe
+  lbimg.alt = gp.title;
+  const ahead = () => { if (gal.length > 1) { pre(gal[(gi + 1) % gal.length]); pre(gal[(gi - 1 + gal.length) % gal.length]); } }; // neighbours load right after this one
+  if (lbimg.getAttribute("src") === url) { lb.classList.remove("loading"); lbcap.textContent = gp.title + count; ahead(); return; }
+  lb.classList.add("loading"); lbcap.textContent = "Loading" + count + "…"; // the old picture dims until the new one is really there
+  const im = new Image();
+  const done = () => { if (tok !== showTok) return; lbimg.src = url; lb.classList.remove("loading"); lbcap.textContent = gp.title + count; ahead(); };
+  im.onload = done; im.onerror = done; im.src = url;
 }
 function openProject(i) {
   const p = PROJECTS[i];
@@ -510,6 +526,13 @@ function decorate() { // projects that open a video or tour get a link to their 
 const step = d => { gi = (gi + d + gal.length) % gal.length; showImg(); };
 prevB.addEventListener("click", () => step(-1));
 nextB.addEventListener("click", () => step(1));
+let tx = 0, ty = 0, tt = 0;
+lb.addEventListener("touchstart", e => { const t = e.changedTouches[0]; tx = t.clientX; ty = t.clientY; tt = Date.now(); }, {passive: true});
+lb.addEventListener("touchend", e => { // swipe left = next, swipe right = previous
+  if (gal.length < 2) return;
+  const t = e.changedTouches[0], dx = t.clientX - tx, dy = t.clientY - ty;
+  if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.4 && Date.now() - tt < 800) step(dx < 0 ? 1 : -1);
+}, {passive: true});
 lb.addEventListener("click", e => { if (e.target === lb) lb.close(); });
 lb.addEventListener("keydown", e => { if (gal.length > 1 && e.key === "ArrowLeft") step(-1); if (gal.length > 1 && e.key === "ArrowRight") step(1); });
 grid.addEventListener("click", e => { const mo = e.target.closest(".more"); if (mo) return openGallery(+mo.dataset.i); const t = e.target.closest("[role=button]"); if (t) openProject(+t.dataset.i); });
