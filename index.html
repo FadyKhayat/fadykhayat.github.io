@@ -120,7 +120,7 @@ button.btn{font-family:inherit;cursor:pointer;line-height:inherit;color:inherit;
 .fields .full{grid-column:1/-1}
 .fld label{display:block;margin-bottom:.4rem;font-size:.8125rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .fld{min-width:0}
-.fld input,.fld select,.fld textarea{display:block;width:100%;min-width:0;padding:.85rem 1rem;background:#111114;color:var(--text);border:1px solid var(--line);border-radius:0;font:inherit;line-height:1.3}
+.fld input,.fld select,.fld textarea{display:block;width:100%;min-width:0;padding:.85rem 1rem;background:#111114;color:var(--text);border:1px solid var(--line);border-radius:0;font:inherit;font-size:14px;line-height:1.3}
 .fld input,.fld select{height:3.1rem}
 .fld select{appearance:none;-webkit-appearance:none;padding-right:2.5rem;text-overflow:ellipsis;background:#111114 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%239a9a9f' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 1rem center/12px 8px}
 .fld textarea{min-height:9rem;resize:vertical}
@@ -187,9 +187,9 @@ dialog.v{width:auto;height:min(88vh,calc(94vw*16/9));aspect-ratio:9/16}
 .brief>p{font-size:.8rem;margin-bottom:1.25rem}
 .fields{gap:.8rem .7rem}
 .fld label{font-size:.58rem;letter-spacing:.08em}
-.fld input,.fld select,.fld textarea{font-size:16px;padding:.55rem .65rem}
+.fld input,.fld select,.fld textarea{font-size:14px;padding:.55rem .6rem}
 .fld input,.fld select{height:2.75rem}
-.fld select{padding-right:2rem;background-position:right .65rem center}
+.fld select{padding-right:1.6rem;background-position:right .5rem center}
 .reply{font-size:.7rem}
 .ico{width:38px;height:38px}
 .ico svg{width:17px;height:17px}
@@ -198,35 +198,48 @@ dialog.v{width:auto;height:min(88vh,calc(94vw*16/9));aspect-ratio:9/16}
 .foot-in{gap:1rem}
 }
 
-.ms{position:relative}
-.msbtn{display:block;width:100%;height:3.1rem;padding:.85rem 2.5rem .85rem 1rem;text-align:left;background:#111114 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%239a9a9f' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 1rem center;color:var(--text);border:1px solid var(--line);border-radius:0;font:inherit;line-height:1.3;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.msbtn .ph{color:var(--muted)}
+.ms{position:static}
+.fields{position:relative;align-items:end}
+.msbtn{display:block;width:100%;height:3.1rem;padding:.85rem 2.5rem .85rem 1rem;font-size:14px;text-align:left;background:#111114 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%239a9a9f' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 1rem center;color:var(--text);border:1px solid var(--line);border-radius:0;font:inherit;font-size:14px;line-height:1.3;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fld ::placeholder{color:#7c7c82;opacity:1}
+.fld select.ph,.msbtn .ph{color:#7c7c82}
+.fld select option{color:var(--text);background:#111114}
 .msbtn:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 .msbtn.err{border-color:#c0504d}
-.mspanel{position:absolute;z-index:20;left:0;right:0;top:calc(100% + 4px);max-height:min(24rem,60vh);overflow:auto;background:#111114;border:1px solid var(--text);padding:.25rem 0}
+.mspanel{position:absolute;z-index:20;left:0;right:0;top:auto;margin-top:4px;max-height:min(26rem,65vh);overflow:auto;background:#111114;border:1px solid var(--text);padding:0 0 .2rem}
 .mspanel[hidden]{display:none}
-.msgh{display:flex;align-items:center;gap:.6rem;width:100%;padding:.8rem 1rem;background:none;color:var(--text);border:0;border-top:1px solid var(--line);font-family:inherit;font-size:13.333px;font-weight:400;line-height:normal;letter-spacing:.08em;text-transform:uppercase;text-align:left;cursor:pointer}
-.msgh:first-child{border-top:0}
+.msrow{display:grid;gap:6px;padding:6px 6px 0}
+.msrow.two{grid-template-columns:1fr 1fr}
+.msrow.one{grid-template-columns:1fr}
+.msbody{padding:6px 6px 0}
+.msgh{display:flex;align-items:center;gap:.5rem;width:100%;min-height:3.2rem;padding:.7rem .9rem;background:none;color:var(--text);border:1px solid var(--line);font-family:inherit;font-size:13.333px;font-weight:400;line-height:1.25;letter-spacing:.08em;text-transform:uppercase;text-align:left;cursor:pointer}
 .msgh:hover{background:#1b1b20}
-.msgh .gn{flex:1}
+.msgh[aria-expanded=true]{border-color:var(--text);background:#1b1b20}
+.msgh .gn{flex:1;min-width:0}
 .msgh .gc{display:none;min-width:1.35rem;padding:.05rem .4rem;background:var(--text);color:var(--bg);font-size:.7rem;letter-spacing:0;text-align:center;border-radius:1rem}
 .msgh.has .gc{display:inline-block}
-.msgh i{width:.55rem;height:.55rem;border-right:1.5px solid var(--muted);border-bottom:1.5px solid var(--muted);transform:rotate(45deg);margin-top:-.2rem;transition:transform .15s}
+.msgh i{flex:none;width:.5rem;height:.5rem;border-right:1.5px solid var(--muted);border-bottom:1.5px solid var(--muted);transform:rotate(45deg);margin-top:-.2rem;transition:transform .15s}
 .msgh[aria-expanded=true] i{transform:rotate(-135deg);margin-top:.2rem}
 .msitems[hidden]{display:none}
-.msitems{padding:0 0 .4rem 1rem}
+.msitems{border:1px solid var(--line);padding:.2rem 0 .3rem;margin-bottom:6px}
+.msgt{padding:.5rem .9rem .2rem;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .fld label.msopt{display:flex;align-items:center;gap:.7rem;margin:0;padding:.55rem 1rem;cursor:pointer;line-height:1.3;font-size:.8rem;letter-spacing:0;text-transform:none;color:var(--text)}
-.fld label.msopt.solo{padding:.8rem 1rem;border-top:1px solid var(--line);font-size:13.333px;font-weight:400;line-height:normal;letter-spacing:.08em;text-transform:uppercase}
+.fld label.msopt.solo{min-height:3.2rem;padding:.7rem .9rem;border:1px solid var(--line);margin-bottom:6px;font-size:13.333px;font-weight:400;line-height:1.25;letter-spacing:.08em;text-transform:uppercase}
 .fld label.msopt:hover{background:#1b1b20}
 .fld .msopt input{display:inline-block;width:1.05rem;height:1.05rem;min-width:0;margin:0;padding:0;border:0;background:none;accent-color:#f2f2f0;flex:none}
-@media (max-width:760px){.msbtn{height:2.75rem;font-size:16px;padding:.55rem 2rem .55rem .65rem;background-position:right .65rem center}.msgh{padding:.8rem .65rem;font-size:.9rem}.msitems{padding-left:.65rem}.fld label.msopt.solo{padding:.8rem .65rem;font-size:.9rem}.fld label.msopt{padding:.6rem .65rem;font-size:.85rem;letter-spacing:0}}
+@media (max-width:760px){.msbtn{height:2.75rem;font-size:14px;padding:.5rem 1.6rem .5rem .6rem;background-position:right .5rem center}.msrow{gap:5px;padding:5px 5px 0}.msbody{padding:5px 5px 0}.msgh{min-height:2.9rem;padding:.55rem .6rem;gap:.35rem;font-size:10.5px;letter-spacing:.05em}.msgh .gc{font-size:.62rem;min-width:1.15rem;padding:.02rem .3rem}.msgh i{width:.4rem;height:.4rem}.fld label.msopt.solo{min-height:2.9rem;padding:.55rem .6rem;font-size:10.5px;letter-spacing:.05em}.fld label.msopt{padding:.5rem .65rem;font-size:.75rem;letter-spacing:0;gap:.55rem}.fld .msopt input{width:.95rem;height:.95rem}.msgt{font-size:.58rem;padding:.45rem .65rem .15rem}.msitems{margin-bottom:5px}}
 
 .up{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1rem;margin-top:.7rem}
 .fld .up input[type=file]{position:absolute;width:1px;height:1px;min-width:0;padding:0;border:0;opacity:0;overflow:hidden;clip:rect(0 0 0 0)}
 .fld label.upbtn{display:inline-block;margin:0;padding:.6rem 1.1rem;border:1px solid var(--text);color:var(--text);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
 .fld label.upbtn:hover{background:var(--text);color:var(--bg)}
 .up input[type=file]:focus-visible+*,.up:focus-within .upbtn{outline:2px solid var(--text);outline-offset:2px}
-.uplist{color:var(--muted);font-size:.85rem;overflow-wrap:anywhere;min-width:0}
+.uplist{display:flex;flex-direction:column;gap:.4rem;width:100%;color:var(--muted);font-size:.85rem;overflow-wrap:anywhere;min-width:0}
+.uplist:empty{display:none}
+.uplist .chip{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:.45rem .7rem;border:1px solid var(--line);background:#111114;color:var(--text)}
+.uplist .chip small{color:var(--muted);margin-left:.4rem}
+.uplist .chip button{all:unset;cursor:pointer;flex:none;padding:0 .35rem;color:var(--muted);font-size:1.1rem;line-height:1}
+.uplist .chip button:hover,.uplist .chip button:focus-visible{color:var(--text)}
 .upclr{all:unset;cursor:pointer;color:var(--muted);font-size:.8rem;text-decoration:underline;text-underline-offset:.25em}
 .upclr:hover{color:var(--text)}
 .uphelp{margin:.6rem 0 0;color:var(--muted);font-size:.8rem;line-height:1.5}
@@ -325,13 +338,13 @@ dialog.v{width:auto;height:min(88vh,calc(94vw*16/9));aspect-ratio:9/16}
         <div class="fields">
           <div class="fld"><label for="f-name">Full name</label><input id="f-name" name="name" autocomplete="name" required></div>
           <div class="fld"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
-          <div class="fld"><label for="f-co">Company or brand (optional)</label><input id="f-co" name="company" autocomplete="organization" placeholder="Business, brand or agency name"></div>
-          <div class="fld full"><label id="svcLbl">Project type (select all that apply)</label><div class="ms" id="ms"><button type="button" class="msbtn" id="msBtn" aria-haspopup="true" aria-expanded="false" aria-labelledby="svcLbl msBtn"><span id="msTxt" class="ph">Select a project type</span></button><div class="mspanel" id="msPanel" hidden></div><input type="hidden" name="service" id="f-svc"></div></div>
+          <div class="fld"><label for="f-co">Company or brand (optional)</label><input id="f-co" name="company" autocomplete="organization" placeholder="Business or brand"></div>
+          <div class="fld"><label id="svcLbl">Project type (select all that apply)</label><div class="ms" id="ms"><button type="button" class="msbtn" id="msBtn" aria-haspopup="true" aria-expanded="false" aria-labelledby="svcLbl msBtn"><span id="msTxt" class="ph">Select a project type</span></button><div class="mspanel" id="msPanel" hidden></div><input type="hidden" name="service" id="f-svc"></div></div>
           <div class="fld"><label for="f-bud">Estimated budget</label><select id="f-bud" name="budget"><option value="" disabled selected>Select a range</option></select></div>
-          <div class="fld" id="custWrap" hidden><label for="f-cust">Your budget</label><input id="f-cust" name="custom_budget" placeholder="For example: $7,500 or €6,850"></div>
-          <div class="fld"><label for="f-dl">Deadline or timeline</label><input id="f-dl" name="deadline" placeholder="For example: 3 weeks, or 15 January"></div>
-          <div class="fld full"><label for="f-det">Project brief</label><textarea id="f-det" name="details" required placeholder="What are we making, and why? Include the goal, who it’s for, where it will be used (social media, web, TV, store pages), and anything you already have, such as product files, a floor plan or references."></textarea></div>
-          <div class="fld full"><label for="f-ref">Reference links or files (optional)</label><input id="f-ref" name="references" placeholder="Links to references or your product page"><div class="up"><label class="upbtn" for="f-files">Attach files</label><input type="file" id="f-files" name="attachment" multiple accept=".jpg,.jpeg,.png,.webp,.pdf,.doc,.docx,.txt,.zip,.mp4,.mov,.mp3,.wav"><span class="uplist" id="upList" aria-live="polite">No files chosen</span><button type="button" class="upclr" id="upClr" hidden>Remove files</button></div><p class="uphelp">Accepted formats: JPG, JPEG, PNG, WEBP, PDF, DOC, DOCX, TXT, ZIP, MP4, MOV, MP3, WAV. Up to 5 files, 10 MB in total. Larger files or video? Paste a Drive, Dropbox or WeTransfer link in the box above.</p></div>
+          <div class="fld"><label for="f-dl">Deadline or timeline</label><input id="f-dl" name="deadline" placeholder="3 weeks, or 15 Jan"></div>
+          <div class="fld full" id="custWrap" hidden><label for="f-cust">Your budget</label><input id="f-cust" name="custom_budget" placeholder="For example: $7,500 or €6,850"></div>
+          <div class="fld full"><label for="f-det">Project brief</label><textarea id="f-det" name="details" required placeholder="What are we making, who is it for, and where will it be used?"></textarea></div>
+          <div class="fld full"><label for="f-ref">Reference links or files (optional)</label><input id="f-ref" name="references" placeholder="Links to references or your product page"><div class="up"><label class="upbtn" for="f-files">Attach files</label><input type="file" id="f-files" multiple accept=".jpg,.jpeg,.png,.webp,.pdf,.doc,.docx,.txt,.zip,.mp4,.mov,.mp3,.wav"><span class="uplist" id="upList" aria-live="polite"></span></div><p class="uphelp">Accepted formats: JPG, JPEG, PNG, WEBP, PDF, DOC, DOCX, TXT, ZIP, MP4, MOV, MP3, WAV. Up to 5 files, 10 MB in total. Larger files or video? Paste a Drive, Dropbox or WeTransfer link in the box above.</p></div>
           <input class="hp" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
         </div>
         <div class="btns" style="margin-top:1.5rem">
@@ -595,32 +608,49 @@ const TIERS = {
 };
 const TIER_RANK = {1:1, 2:2, 3:3, 4:4, 5:5};
 const msBtn = $("#msBtn"), msTxt = $("#msTxt"), msPanel = $("#msPanel"), svcHidden = $("#f-svc");
-GROUPS.forEach(([g, items], gi) => {
-  const mk = ([name, tier]) => {
-    const l = document.createElement("label"); l.className = "msopt";
-    const c = document.createElement("input"); c.type = "checkbox"; c.value = name; c.dataset.tier = tier;
-    l.appendChild(c); l.appendChild(document.createTextNode(name)); return l;
-  };
-  if (items.length === 1) { const l = mk(items[0]); l.classList.add("solo"); msPanel.appendChild(l); return; }
-  const h = document.createElement("button"); h.type = "button"; h.className = "msgh"; h.setAttribute("aria-expanded", "false"); h.setAttribute("aria-controls", "msg" + gi);
-  h.innerHTML = '<span class="gn"></span><span class="gc"></span><i aria-hidden="true"></i>'; h.querySelector(".gn").textContent = g;
-  const box = document.createElement("div"); box.className = "msitems"; box.id = "msg" + gi; box.hidden = true;
-  items.forEach(it => box.appendChild(mk(it)));
-  h.addEventListener("click", () => { const o = box.hidden; box.hidden = !o; h.setAttribute("aria-expanded", o); });
-  msPanel.appendChild(h); msPanel.appendChild(box);
+const ROWS = GROUPS.map((_, i) => [i]);
+const mkOpt = ([name, tier]) => {
+  const l = document.createElement("label"); l.className = "msopt";
+  const c = document.createElement("input"); c.type = "checkbox"; c.value = name; c.dataset.tier = tier;
+  l.appendChild(c); l.appendChild(document.createTextNode(name)); return l;
+};
+ROWS.forEach(r => {
+  const row = document.createElement("div"); row.className = "msrow " + (r.length > 1 ? "two" : "one");
+  const body = document.createElement("div"); body.className = "msbody"; body.hidden = true;
+  r.forEach(gi => {
+    const [g, items] = GROUPS[gi];
+    if (items.length === 1) { const l = mkOpt(items[0]); l.classList.add("solo"); row.appendChild(l); return; }
+    const h = document.createElement("button"); h.type = "button"; h.className = "msgh"; h.setAttribute("aria-expanded", "false");
+    h.innerHTML = '<span class="gn"></span><span class="gc"></span><i aria-hidden="true"></i>'; h.querySelector(".gn").textContent = g;
+    const box = document.createElement("div"); box.className = "msitems"; box.hidden = true; box.id = "msg" + gi; h.setAttribute("aria-controls", box.id);
+    const t = document.createElement("div"); t.className = "msgt"; t.textContent = g; box.appendChild(t);
+    items.forEach(it => box.appendChild(mkOpt(it)));
+    h._box = box; h._body = body;
+    h.addEventListener("click", () => {
+      const o = box.hidden; box.hidden = !o; h.setAttribute("aria-expanded", o);
+      body.hidden = ![...body.children].some(x => !x.hidden);
+    });
+    body.appendChild(box); row.appendChild(h);
+  });
+  msPanel.appendChild(row); if (body.children.length) msPanel.appendChild(body);
 });
 function updCounts() {
   msPanel.querySelectorAll(".msgh").forEach(h => {
-    const n = h.nextElementSibling.querySelectorAll("input:checked").length;
+    const n = h._box.querySelectorAll("input:checked").length;
     h.querySelector(".gc").textContent = n ? n : ""; h.classList.toggle("has", n > 0);
   });
 }
-function collapseAll() { msPanel.querySelectorAll(".msgh").forEach(h => { h.setAttribute("aria-expanded", "false"); h.nextElementSibling.hidden = true; }); }
+function collapseAll() { msPanel.querySelectorAll(".msgh").forEach(h => { h.setAttribute("aria-expanded", "false"); h._box.hidden = true; h._body.hidden = true; }); }
 const boxes = () => [...msPanel.querySelectorAll("input")];
 function setPanel(open) { msPanel.hidden = !open; msBtn.setAttribute("aria-expanded", open); }
 msBtn.addEventListener("click", () => setPanel(msPanel.hidden));
 document.addEventListener("click", e => { if (!$("#ms").contains(e.target)) setPanel(false); });
 $("#ms").addEventListener("keydown", e => { if (e.key === "Escape") { setPanel(false); msBtn.focus(); } });
+const phoneMQ = window.matchMedia("(max-width:760px)");
+const copy = () => phoneMQ.matches
+  ? { co: "Business or brand", dl: "3 weeks, or 15 Jan", notSure: "Not sure, advise me" }
+  : { co: "Business, brand or agency name", dl: "For example: 3 weeks, or 15 January", notSure: "Not sure yet, advise me" };
+function applyCopy() { const c = copy(); $("#f-co").placeholder = c.co; $("#f-dl").placeholder = c.dl; fillBudget(); }
 function fillBudget() {
   const sel = boxes().filter(b => b.checked);
   const top = sel.length ? Math.max(...sel.map(b => TIER_RANK[b.dataset.tier])) : 0;
@@ -629,9 +659,10 @@ function fillBudget() {
   const add = (t, dis) => { const o = document.createElement("option"); o.textContent = t; if (dis) { o.value = ""; o.disabled = true; } budget.appendChild(o); return o; };
   const ph = add("Select a range", true);
   (top ? TIERS[top] : []).forEach(t => add(t));
-  add("Not sure yet, advise me"); add("Custom amount");
+  add(copy().notSure); add("Custom amount");
   const keep = [...budget.options].find(o => o.value === prev && !o.disabled);
   if (keep) keep.selected = true; else ph.selected = true;
+  budget.classList.toggle("ph", !budget.value);
   budget.dispatchEvent(new Event("change"));
 }
 function syncSvc() {
@@ -643,44 +674,64 @@ function syncSvc() {
   updCounts(); fillBudget();
 }
 msPanel.addEventListener("change", syncSvc);
-fillBudget();
+applyCopy();
+phoneMQ.addEventListener("change", applyCopy);
 budget.addEventListener("change", () => {
+  budget.classList.toggle("ph", !budget.value);
   const on = budget.value === "Custom amount";
   custWrap.hidden = !on; cust.required = on;
   if (on) cust.focus();
 });
-const files = $("#f-files"), upList = $("#upList"), upClr = $("#upClr");
-const OK_EXT = ["jpg","jpeg","png","webp","pdf","doc","docx","txt","zip","mp4","mov","mp3","wav"], MAX_BYTES = 10 * 1024 * 1024;
+const files = $("#f-files"), upList = $("#upList");
+const OK_EXT = ["jpg","jpeg","png","webp","pdf","doc","docx","txt","zip","mp4","mov","mp3","wav"], MAX_BYTES = 10 * 1024 * 1024, MAX_FILES = 5;
 const fmt = n => n >= 1048576 ? (n / 1048576).toFixed(1) + " MB" : Math.max(1, Math.round(n / 1024)) + " KB";
-function resetFiles() { files.value = ""; upList.textContent = "No files chosen"; upClr.hidden = true; }
+let chosen = [];
+function renderFiles() {
+  upList.innerHTML = "";
+  chosen.forEach((f, i) => {
+    const c = document.createElement("div"); c.className = "chip";
+    const t = document.createElement("span"); t.textContent = f.name; const sm = document.createElement("small"); sm.textContent = fmt(f.size); t.appendChild(sm);
+    const x = document.createElement("button"); x.type = "button"; x.textContent = "×"; x.setAttribute("aria-label", "Remove " + f.name);
+    x.addEventListener("click", () => { chosen.splice(i, 1); renderFiles(); msg.textContent = ""; });
+    c.appendChild(t); c.appendChild(x); upList.appendChild(c);
+  });
+}
+function resetFiles() { chosen = []; files.value = ""; renderFiles(); }
 files.addEventListener("change", () => {
-  const list = [...files.files];
-  if (!list.length) return resetFiles();
-  const bad = list.find(f => !OK_EXT.includes((f.name.split(".").pop() || "").toLowerCase()));
-  const total = list.reduce((a, f) => a + f.size, 0);
-  if (bad) { resetFiles(); msg.textContent = "“" + bad.name + "” isn’t an accepted file type. Please use JPG, JPEG, PNG, WEBP, PDF, DOC, DOCX, TXT, ZIP, MP4, MOV, MP3 or WAV."; return; }
-  if (list.length > 5) { resetFiles(); msg.textContent = "Please attach up to 5 files, or paste a link instead."; return; }
-  if (total > MAX_BYTES) { resetFiles(); msg.textContent = "Those files total " + fmt(total) + ". The limit is 10 MB in total, so please remove some files or paste a Drive, Dropbox or WeTransfer link instead."; return; }
-  msg.textContent = "";
-  upList.textContent = list.map(f => f.name + " (" + fmt(f.size) + ")").join(", "); upClr.hidden = false;
+  const add = [...files.files]; files.value = "";
+  if (!add.length) return;
+  const bad = add.find(f => !OK_EXT.includes((f.name.split(".").pop() || "").toLowerCase()));
+  if (bad) { msg.textContent = "“" + bad.name + "” isn’t an accepted file type. Please use JPG, JPEG, PNG, WEBP, PDF, DOC, DOCX, TXT, ZIP, MP4, MOV, MP3 or WAV."; return; }
+  const next = [...chosen]; add.forEach(f => { if (!next.some(x => x.name === f.name && x.size === f.size)) next.push(f); });
+  if (next.length > MAX_FILES) { msg.textContent = "Please attach up to 5 files, or paste a link instead."; return; }
+  const total = next.reduce((a, f) => a + f.size, 0);
+  if (total > MAX_BYTES) { msg.textContent = "Those files total " + fmt(total) + ". The limit is 10 MB in total, so please remove some files or paste a Drive, Dropbox or WeTransfer link instead."; return; }
+  msg.textContent = ""; chosen = next; renderFiles();
 });
-upClr.addEventListener("click", () => { resetFiles(); msg.textContent = ""; });
 form.addEventListener("submit", async e => {
   e.preventDefault();
-  if (!svcHidden.value) { msBtn.classList.add("err"); setPanel(true); msBtn.scrollIntoView({block:"center"}); msg.textContent = "Please select at least one project type."; return; }
-  if (!budget.value) { budget.focus(); msg.textContent = "Please choose an estimated budget range."; return; }
   msg.textContent = "";
   const data = new FormData(form);
-  if (data.get("budget") === "Custom amount") data.set("budget", "Custom: " + String(data.get("custom_budget") || "").trim());
+  if (!data.get("service")) data.set("service", "Not specified");
+  if (!data.get("budget")) data.set("budget", "Not specified");
+  else if (data.get("budget") === "Custom amount") data.set("budget", "Custom: " + String(data.get("custom_budget") || "").trim());
+  if (!String(data.get("deadline") || "").trim()) data.set("deadline", "Not specified");
   data.delete("custom_budget");
-  if (!files.files.length) data.delete("attachment");
   data.set("_subject", "New brief from " + data.get("name"));
   data.set("_template", "table");
+  const withFiles = chosen.length > 0;
+  chosen.forEach((f, i) => data.append(i ? "attachment" + (i + 1) : "attachment", f, f.name));
+  if (withFiles) data.set("_captcha", "false");
   sendBtn.disabled = true; sendBtn.textContent = "Sending…"; msg.textContent = "";
   try {
-    const res = await fetch(FORM_ENDPOINT, { method: "POST", headers: { "Accept": "application/json" }, body: data });
-    const out = await res.json().catch(() => ({}));
-    if (!res.ok || out.success === "false" || out.success === false) throw new Error(out.message || "failed");
+    if (withFiles) {
+      // FormSubmit only attaches files on its standard (non-AJAX) endpoint; the reply can't be read cross-site, so only a network failure shows an error.
+      await fetch(FORM_ENDPOINT.replace("/ajax/", "/"), { method: "POST", mode: "no-cors", body: data });
+    } else {
+      const res = await fetch(FORM_ENDPOINT, { method: "POST", headers: { "Accept": "application/json" }, body: data });
+      const out = await res.json().catch(() => ({}));
+      if (!res.ok || out.success === "false" || out.success === false) throw new Error(out.message || "failed");
+    }
     form.reset(); custWrap.hidden = true; cust.required = false; syncSvc(); collapseAll(); resetFiles();
     msg.textContent = "Thank you. Your brief is on its way, and I’ll reply by email.";
   } catch (err) {
