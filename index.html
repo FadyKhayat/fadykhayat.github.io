@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fady Khayat | 3D Artist &amp; Creative Director</title>
-<meta name="description" content="Fady Khayat is a 3D Artist and Creative Director based in Beirut, Lebanon, making product CGI, FOOH and VFX ads, and virtual tours worldwide.">
+<meta name="description" content="Fady Khayat is a 3D Artist and Creative Director creating Product CGI, FOOH and VFX Ads, Virtual Tours, and VR Experiences worldwide.">
 <meta property="og:title" content="Fady Khayat | 3D Artist &amp; Creative Director">
-<meta property="og:description" content="Product CGI, FOOH and VFX ads, and virtual tours.">
+<meta property="og:description" content="Fady Khayat is a 3D Artist and Creative Director creating Product CGI, FOOH and VFX Ads, Virtual Tours, and VR Experiences worldwide.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://fadykhayat.art/">
 <meta property="og:image" content="https://fadykhayat.art/images/og-image.jpg">
@@ -197,6 +197,40 @@ dialog.v{width:auto;height:min(88vh,calc(94vw*16/9));aspect-ratio:9/16}
 .foot{font-size:.7rem}
 .foot-in{gap:1rem}
 }
+
+.ms{position:relative}
+.msbtn{display:block;width:100%;height:3.1rem;padding:.85rem 2.5rem .85rem 1rem;text-align:left;background:#111114 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%239a9a9f' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 1rem center;color:var(--text);border:1px solid var(--line);border-radius:0;font:inherit;line-height:1.3;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.msbtn .ph{color:var(--muted)}
+.msbtn:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+.msbtn.err{border-color:#c0504d}
+.mspanel{position:absolute;z-index:20;left:0;right:0;top:calc(100% + 4px);max-height:min(24rem,60vh);overflow:auto;background:#111114;border:1px solid var(--text);padding:.25rem 0}
+.mspanel[hidden]{display:none}
+.msgh{display:flex;align-items:center;gap:.6rem;width:100%;padding:.8rem 1rem;background:none;color:var(--text);border:0;border-top:1px solid var(--line);font-family:inherit;font-size:13.333px;font-weight:400;line-height:normal;letter-spacing:.08em;text-transform:uppercase;text-align:left;cursor:pointer}
+.msgh:first-child{border-top:0}
+.msgh:hover{background:#1b1b20}
+.msgh .gn{flex:1}
+.msgh .gc{display:none;min-width:1.35rem;padding:.05rem .4rem;background:var(--text);color:var(--bg);font-size:.7rem;letter-spacing:0;text-align:center;border-radius:1rem}
+.msgh.has .gc{display:inline-block}
+.msgh i{width:.55rem;height:.55rem;border-right:1.5px solid var(--muted);border-bottom:1.5px solid var(--muted);transform:rotate(45deg);margin-top:-.2rem;transition:transform .15s}
+.msgh[aria-expanded=true] i{transform:rotate(-135deg);margin-top:.2rem}
+.msitems[hidden]{display:none}
+.msitems{padding:0 0 .4rem 1rem}
+.fld label.msopt{display:flex;align-items:center;gap:.7rem;margin:0;padding:.55rem 1rem;cursor:pointer;line-height:1.3;font-size:.8rem;letter-spacing:0;text-transform:none;color:var(--text)}
+.fld label.msopt.solo{padding:.8rem 1rem;border-top:1px solid var(--line);font-size:13.333px;font-weight:400;line-height:normal;letter-spacing:.08em;text-transform:uppercase}
+.fld label.msopt:hover{background:#1b1b20}
+.fld .msopt input{display:inline-block;width:1.05rem;height:1.05rem;min-width:0;margin:0;padding:0;border:0;background:none;accent-color:#f2f2f0;flex:none}
+@media (max-width:760px){.msbtn{height:2.75rem;font-size:16px;padding:.55rem 2rem .55rem .65rem;background-position:right .65rem center}.msgh{padding:.8rem .65rem;font-size:.9rem}.msitems{padding-left:.65rem}.fld label.msopt.solo{padding:.8rem .65rem;font-size:.9rem}.fld label.msopt{padding:.6rem .65rem;font-size:.85rem;letter-spacing:0}}
+
+.up{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1rem;margin-top:.7rem}
+.fld .up input[type=file]{position:absolute;width:1px;height:1px;min-width:0;padding:0;border:0;opacity:0;overflow:hidden;clip:rect(0 0 0 0)}
+.fld label.upbtn{display:inline-block;margin:0;padding:.6rem 1.1rem;border:1px solid var(--text);color:var(--text);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
+.fld label.upbtn:hover{background:var(--text);color:var(--bg)}
+.up input[type=file]:focus-visible+*,.up:focus-within .upbtn{outline:2px solid var(--text);outline-offset:2px}
+.uplist{color:var(--muted);font-size:.85rem;overflow-wrap:anywhere;min-width:0}
+.upclr{all:unset;cursor:pointer;color:var(--muted);font-size:.8rem;text-decoration:underline;text-underline-offset:.25em}
+.upclr:hover{color:var(--text)}
+.uphelp{margin:.6rem 0 0;color:var(--muted);font-size:.8rem;line-height:1.5}
+@media (max-width:760px){.fld label.upbtn{font-size:.62rem;padding:.55rem .9rem;letter-spacing:.08em}.uplist,.uphelp{font-size:.72rem}.upclr{font-size:.72rem}}
 </style>
 <script type="application/ld+json">
 {
@@ -215,10 +249,9 @@ dialog.v{width:auto;height:min(88vh,calc(94vw*16/9));aspect-ratio:9/16}
       "url": "https://fadykhayat.art/",
       "image": "https://fadykhayat.art/images/fady.jpg",
       "jobTitle": "3D Artist & Creative Director",
-      "description": "3D Artist and Creative Director based in Beirut, Lebanon, making product CGI, 3D animation, FOOH and VFX ads, and virtual tours for brands and agencies.",
+      "description": "Fady Khayat is a 3D Artist and Creative Director creating Product CGI, FOOH and VFX Ads, Virtual Tours, and VR Experiences worldwide.",
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": "Beirut",
         "addressCountry": "LB"
       },
       "knowsAbout": ["Product CGI", "3D Animation", "FOOH Ads", "VFX", "Virtual Tours", "Creative Direction"],
@@ -267,9 +300,10 @@ dialog.v{width:auto;height:min(88vh,calc(94vw*16/9));aspect-ratio:9/16}
 
   <section class="block center" id="services">
     <h2>Services</h2>
-    <p class="svc">Product CGI<span>•</span>3D Animation<span>•</span>FOOH &amp; VFX Ads</p>
-    <p class="svc">Virtual Tours<span>•</span>VR<span>•</span>Creative Design</p>
-    <p class="svc">Environments<span>•</span>Characters</p>
+    <p class="svc">Product CGI &amp; Animation<span>•</span>FOOH &amp; Visual Effects</p>
+    <p class="svc">Virtual Reality<span>•</span>Architectural Visualization</p>
+    <p class="svc">Characters &amp; Environments<span>•</span>Animation &amp; Film</p>
+    <p class="svc">Design &amp; Post-Production</p>
   </section>
 
   <section class="block about" id="about">
@@ -283,21 +317,21 @@ dialog.v{width:auto;height:min(88vh,calc(94vw*16/9));aspect-ratio:9/16}
 
   <section class="block" id="contact" data-nosnippet>
     <div class="brief" id="brief">
-      <h2>Tell me about your vision</h2>
+      <h2>Tell me about your project</h2>
       <p>Drop a line about the project — timeline, scope, vibe — or skip the form and book a call.</p>
       <div class="btns" style="margin:0 0 1rem"><a class="btn solid bookLink" id="bookBtn" href="#">Book a 30 min call</a></div>
       <p class="alt"><a class="mailsm" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span></span></a></p>
       <form id="briefForm">
         <div class="fields">
-          <div class="fld"><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" required></div>
+          <div class="fld"><label for="f-name">Full name</label><input id="f-name" name="name" autocomplete="name" required></div>
           <div class="fld"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
-          <div class="fld"><label for="f-co">Company (optional)</label><input id="f-co" name="company" autocomplete="organization"></div>
-          <div class="fld"><label for="f-svc">What do you need?</label><select id="f-svc" name="service"><option>Product CGI or 3D animation</option><option>FOOH or VFX ad</option><option>Virtual tour or VR</option><option>Environment, character or ArchViz</option><option>Something else</option></select></div>
-          <div class="fld"><label for="f-bud">Budget</label><select id="f-bud" name="budget"><option>Not sure yet</option><option>Under $500</option><option>$500 to $1,500</option><option>$1,500 to $5,000</option><option>$5,000 to $10,000</option><option>$10,000+</option><option>Custom amount</option></select></div>
-          <div class="fld" id="custWrap" hidden><label for="f-cust">Your budget</label><input id="f-cust" name="custom_budget" placeholder="For example: $7,500 or €3,000"></div>
-          <div class="fld"><label for="f-dl">Deadline</label><input id="f-dl" name="deadline" placeholder="For example: 3 weeks, or 15 January"></div>
-          <div class="fld full"><label for="f-det">Project details</label><textarea id="f-det" name="details" required placeholder="What is it, who is it for, and what should the result do?"></textarea></div>
-          <div class="fld full"><label for="f-ref">Reference links (optional)</label><input id="f-ref" name="references" placeholder="Videos, images or files you like, or your product page"></div>
+          <div class="fld"><label for="f-co">Company or brand (optional)</label><input id="f-co" name="company" autocomplete="organization" placeholder="Business, brand or agency name"></div>
+          <div class="fld full"><label id="svcLbl">Project type (select all that apply)</label><div class="ms" id="ms"><button type="button" class="msbtn" id="msBtn" aria-haspopup="true" aria-expanded="false" aria-labelledby="svcLbl msBtn"><span id="msTxt" class="ph">Select a project type</span></button><div class="mspanel" id="msPanel" hidden></div><input type="hidden" name="service" id="f-svc"></div></div>
+          <div class="fld"><label for="f-bud">Estimated budget</label><select id="f-bud" name="budget"><option value="" disabled selected>Select a range</option></select></div>
+          <div class="fld" id="custWrap" hidden><label for="f-cust">Your budget</label><input id="f-cust" name="custom_budget" placeholder="For example: $7,500 or €6,850"></div>
+          <div class="fld"><label for="f-dl">Deadline or timeline</label><input id="f-dl" name="deadline" placeholder="For example: 3 weeks, or 15 January"></div>
+          <div class="fld full"><label for="f-det">Project brief</label><textarea id="f-det" name="details" required placeholder="What are we making, and why? Include the goal, who it’s for, where it will be used (social media, web, TV, store pages), and anything you already have, such as product files, a floor plan or references."></textarea></div>
+          <div class="fld full"><label for="f-ref">Reference links or files (optional)</label><input id="f-ref" name="references" placeholder="Links to references or your product page"><div class="up"><label class="upbtn" for="f-files">Attach files</label><input type="file" id="f-files" name="attachment" multiple accept=".jpg,.jpeg,.png,.webp,.pdf,.doc,.docx,.txt,.zip,.mp4,.mov,.mp3,.wav"><span class="uplist" id="upList" aria-live="polite">No files chosen</span><button type="button" class="upclr" id="upClr" hidden>Remove files</button></div><p class="uphelp">Accepted formats: JPG, JPEG, PNG, WEBP, PDF, DOC, DOCX, TXT, ZIP, MP4, MOV, MP3, WAV. Up to 5 files, 10 MB in total. Larger files or video? Paste a Drive, Dropbox or WeTransfer link in the box above.</p></div>
           <input class="hp" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
         </div>
         <div class="btns" style="margin-top:1.5rem">
@@ -346,15 +380,15 @@ const SHOWREEL = ""; // YouTube video ID, e.g. "dQw4w9WgXcQ"
 const FORM_ENDPOINT = "https://formsubmit.co/ajax/" + EMAIL; // briefs are emailed to EMAIL
 // img = cover image in the images folder. yt = YouTube video ID (opens in a pop-up with sound). link = page to open (tour, Behance).
 const PROJECTS = [
-  {title:"Sci-fi city street", cat:"Environments", desc:"A cinematic street scene built around lighting, atmosphere and a small story, shown with clay breakdowns.", img:"images/sci-fi-street.jpg", yt:"", link:""},
-  {title:"F40 in the garage", cat:"Product CGI", desc:"A white F40 in a dark garage, animated to Under Vato’s “Me Fume Un Gallito”.", img:"images/f40.jpg", yt:"", link:""},
-  {title:"Overgrown soda can", cat:"Environments", desc:"A soda can reclaimed by nature in an abandoned world, built in Blender and graded in Photoshop.", img:"images/overgrown-can.jpg", yt:"", link:""},
-  {title:"OBSBOT Tail 2 at the Esports World Cup", cat:"Product CGI", desc:"Product renders of the OBSBOT Tail 2 beside a 3D recreation of the Esports World Cup trophy in an arena-style setup.", img:"images/obsbot-tail2.jpg", yt:"", link:""},
-  {title:"Nike concept animation", cat:"Product CGI", desc:"A 3D concept animation created for Nike.", img:"images/nike.jpg", yt:"WoCnpJXumZQ", vertical:true, link:""},
-  {title:"Giant burger", cat:"FOOH & VFX", desc:"An oversized burger breaking through a building’s glass façade, with destruction simulation and animated crowd reactions.", img:"images/burger.jpg", yt:"iBRjwx8IOzk", vertical:true, link:""},
-  {title:"OBSBOT Meet 2 commercial", cat:"Product CGI", desc:"A product-commercial concept with a camera inside a vending machine and a playful reveal.", img:"images/obsbot-meet2.jpg", yt:"b8raXn_Vt4Y", vertical:true, link:""},
-  {title:"3D gym virtual tour", cat:"VR tours", desc:"A dark, cinematic gym you can walk through in 360°, with a full reverse view of reception, shop area and exit.", img:"images/dark-gym-360.jpg", yt:"", link:"https://fadykhayat.github.io/3D-Gym-VirtualTour/"},
-  {title:"Interactive apartment tour", cat:"VR tours", desc:"A client’s floor plan turned into an interactive 4K 360° tour, modeled and textured in Blender and built in 3DVista for desktop, mobile and VR headsets.", img:"images/apartment-tour.jpg", yt:"", link:"https://fadykhayat.github.io/3DVirtualTour/"}
+  {title:"Sci-fi city street", cat:"Characters & Environments", desc:"A cinematic street scene built around lighting, atmosphere and a small story, shown with clay breakdowns.", img:"images/sci-fi-street.jpg", yt:"", link:""},
+  {title:"F40 in the garage", cat:"Product CGI & Animation", desc:"A white F40 in a dark garage, animated to Under Vato’s “Me Fume Un Gallito”.", img:"images/f40.jpg", yt:"", link:""},
+  {title:"Overgrown soda can", cat:"Characters & Environments", desc:"A soda can reclaimed by nature in an abandoned world, built in Blender and graded in Photoshop.", img:"images/overgrown-can.jpg", yt:"", link:""},
+  {title:"OBSBOT Tail 2 at the Esports World Cup", cat:"Product CGI & Animation", desc:"Product renders of the OBSBOT Tail 2 beside a 3D recreation of the Esports World Cup trophy in an arena-style setup.", img:"images/obsbot-tail2.jpg", yt:"", link:""},
+  {title:"Nike concept animation", cat:"Product CGI & Animation", desc:"A 3D concept animation created for Nike.", img:"images/nike.jpg", yt:"WoCnpJXumZQ", vertical:true, link:""},
+  {title:"Giant burger", cat:"FOOH & Visual Effects", desc:"An oversized burger breaking through a building’s glass façade, with destruction simulation and animated crowd reactions.", img:"images/burger.jpg", yt:"iBRjwx8IOzk", vertical:true, link:""},
+  {title:"OBSBOT Meet 2 commercial", cat:"Product CGI & Animation", desc:"A product-commercial concept with a camera inside a vending machine and a playful reveal.", img:"images/obsbot-meet2.jpg", yt:"b8raXn_Vt4Y", vertical:true, link:""},
+  {title:"3D gym virtual tour", cat:"Virtual Reality", desc:"A dark, cinematic gym you can walk through in 360°, with a full reverse view of reception, shop area and exit.", img:"images/dark-gym-360.jpg", yt:"", link:"https://fadykhayat.github.io/3D-Gym-VirtualTour/"},
+  {title:"Interactive apartment tour", cat:"Virtual Reality", desc:"A client’s floor plan turned into an interactive 4K 360° tour, modeled and textured in Blender and built in 3DVista for desktop, mobile and VR headsets.", img:"images/apartment-tour.jpg", yt:"", link:"https://fadykhayat.github.io/3DVirtualTour/"}
 ];
 /* ===== end of editable area ===== */
 
@@ -542,24 +576,112 @@ dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
 
 const form = $("#briefForm"), msg = $("#briefMsg"), sendBtn = $("#briefBtn");
 const budget = $("#f-bud"), custWrap = $("#custWrap"), cust = $("#f-cust");
+const GROUPS = [
+  ["Product CGI & Animation", [["3D Product Modeling",2],["3D Product Animation",3],["3D Product Rendering",2],["E-commerce Product Videos",2],["CGI Commercials (TV, Web & Social)",3]]],
+  ["FOOH & Visual Effects", [["FOOH Advertising",3],["3D Integration & Compositing",2],["3D Simulations & FX",2]]],
+  ["Virtual Reality", [["360° Virtual Tours",3],["Interactive VR Experiences",3]]],
+  ["Architectural Visualization", [["Architectural Visualization (Stills)",2],["Architectural Walkthroughs (Animation)",3]]],
+  ["Characters & Environments", [["3D Character Design & Modeling",4],["Character Rigging & Animation",4],["3D Environment Design",4]]],
+  ["Animation & Film", [["Short-form 3D Animation (Under 1 Minute)",3],["Long-form 3D Animation (1 Minute+)",5],["Music Video Visuals",3]]],
+  ["Design & Post-Production", [["Branding & Logo Design",1],["Graphic Design (Social, Print & Advertising)",1],["Video Editing & Post-Production",1]]],
+  ["Other", [["Something Else",2]]]
+];
+const TIERS = {
+  1: ["Under $300","$300 to $800","$800 to $2k","$2k to $4k","$4k+"],
+  2: ["Under $500","$500 to $1.5k","$1.5k to $3k","$3k to $6k","$6k to $10k","$10k+"],
+  3: ["Under $1k","$1k to $2.5k","$2.5k to $5k","$5k to $10k","$10k to $20k","$20k+"],
+  4: ["Under $2k","$2k to $5k","$5k to $10k","$10k to $20k","$20k+"],
+  5: ["Under $5k","$5k to $10k","$10k to $20k","$20k to $40k","$40k+"]
+};
+const TIER_RANK = {1:1, 2:2, 3:3, 4:4, 5:5};
+const msBtn = $("#msBtn"), msTxt = $("#msTxt"), msPanel = $("#msPanel"), svcHidden = $("#f-svc");
+GROUPS.forEach(([g, items], gi) => {
+  const mk = ([name, tier]) => {
+    const l = document.createElement("label"); l.className = "msopt";
+    const c = document.createElement("input"); c.type = "checkbox"; c.value = name; c.dataset.tier = tier;
+    l.appendChild(c); l.appendChild(document.createTextNode(name)); return l;
+  };
+  if (items.length === 1) { const l = mk(items[0]); l.classList.add("solo"); msPanel.appendChild(l); return; }
+  const h = document.createElement("button"); h.type = "button"; h.className = "msgh"; h.setAttribute("aria-expanded", "false"); h.setAttribute("aria-controls", "msg" + gi);
+  h.innerHTML = '<span class="gn"></span><span class="gc"></span><i aria-hidden="true"></i>'; h.querySelector(".gn").textContent = g;
+  const box = document.createElement("div"); box.className = "msitems"; box.id = "msg" + gi; box.hidden = true;
+  items.forEach(it => box.appendChild(mk(it)));
+  h.addEventListener("click", () => { const o = box.hidden; box.hidden = !o; h.setAttribute("aria-expanded", o); });
+  msPanel.appendChild(h); msPanel.appendChild(box);
+});
+function updCounts() {
+  msPanel.querySelectorAll(".msgh").forEach(h => {
+    const n = h.nextElementSibling.querySelectorAll("input:checked").length;
+    h.querySelector(".gc").textContent = n ? n : ""; h.classList.toggle("has", n > 0);
+  });
+}
+function collapseAll() { msPanel.querySelectorAll(".msgh").forEach(h => { h.setAttribute("aria-expanded", "false"); h.nextElementSibling.hidden = true; }); }
+const boxes = () => [...msPanel.querySelectorAll("input")];
+function setPanel(open) { msPanel.hidden = !open; msBtn.setAttribute("aria-expanded", open); }
+msBtn.addEventListener("click", () => setPanel(msPanel.hidden));
+document.addEventListener("click", e => { if (!$("#ms").contains(e.target)) setPanel(false); });
+$("#ms").addEventListener("keydown", e => { if (e.key === "Escape") { setPanel(false); msBtn.focus(); } });
+function fillBudget() {
+  const sel = boxes().filter(b => b.checked);
+  const top = sel.length ? Math.max(...sel.map(b => TIER_RANK[b.dataset.tier])) : 0;
+  const prev = budget.value;
+  budget.innerHTML = "";
+  const add = (t, dis) => { const o = document.createElement("option"); o.textContent = t; if (dis) { o.value = ""; o.disabled = true; } budget.appendChild(o); return o; };
+  const ph = add("Select a range", true);
+  (top ? TIERS[top] : []).forEach(t => add(t));
+  add("Not sure yet, advise me"); add("Custom amount");
+  const keep = [...budget.options].find(o => o.value === prev && !o.disabled);
+  if (keep) keep.selected = true; else ph.selected = true;
+  budget.dispatchEvent(new Event("change"));
+}
+function syncSvc() {
+  const sel = boxes().filter(b => b.checked).map(b => b.value);
+  svcHidden.value = sel.join(", ");
+  msTxt.className = sel.length ? "" : "ph";
+  msTxt.textContent = !sel.length ? "Select a project type" : sel.length <= 2 ? sel.join(", ") : sel.length + " selected";
+  if (sel.length) msBtn.classList.remove("err");
+  updCounts(); fillBudget();
+}
+msPanel.addEventListener("change", syncSvc);
+fillBudget();
 budget.addEventListener("change", () => {
   const on = budget.value === "Custom amount";
   custWrap.hidden = !on; cust.required = on;
   if (on) cust.focus();
 });
+const files = $("#f-files"), upList = $("#upList"), upClr = $("#upClr");
+const OK_EXT = ["jpg","jpeg","png","webp","pdf","doc","docx","txt","zip","mp4","mov","mp3","wav"], MAX_BYTES = 10 * 1024 * 1024;
+const fmt = n => n >= 1048576 ? (n / 1048576).toFixed(1) + " MB" : Math.max(1, Math.round(n / 1024)) + " KB";
+function resetFiles() { files.value = ""; upList.textContent = "No files chosen"; upClr.hidden = true; }
+files.addEventListener("change", () => {
+  const list = [...files.files];
+  if (!list.length) return resetFiles();
+  const bad = list.find(f => !OK_EXT.includes((f.name.split(".").pop() || "").toLowerCase()));
+  const total = list.reduce((a, f) => a + f.size, 0);
+  if (bad) { resetFiles(); msg.textContent = "“" + bad.name + "” isn’t an accepted file type. Please use JPG, JPEG, PNG, WEBP, PDF, DOC, DOCX, TXT, ZIP, MP4, MOV, MP3 or WAV."; return; }
+  if (list.length > 5) { resetFiles(); msg.textContent = "Please attach up to 5 files, or paste a link instead."; return; }
+  if (total > MAX_BYTES) { resetFiles(); msg.textContent = "Those files total " + fmt(total) + ". The limit is 10 MB in total, so please remove some files or paste a Drive, Dropbox or WeTransfer link instead."; return; }
+  msg.textContent = "";
+  upList.textContent = list.map(f => f.name + " (" + fmt(f.size) + ")").join(", "); upClr.hidden = false;
+});
+upClr.addEventListener("click", () => { resetFiles(); msg.textContent = ""; });
 form.addEventListener("submit", async e => {
   e.preventDefault();
-  const data = Object.fromEntries(new FormData(form));
-  if (data.budget === "Custom amount") data.budget = "Custom: " + (data.custom_budget || "").trim();
-  delete data.custom_budget;
-  data._subject = "New brief from " + data.name;
-  data._template = "table";
+  if (!svcHidden.value) { msBtn.classList.add("err"); setPanel(true); msBtn.scrollIntoView({block:"center"}); msg.textContent = "Please select at least one project type."; return; }
+  if (!budget.value) { budget.focus(); msg.textContent = "Please choose an estimated budget range."; return; }
+  msg.textContent = "";
+  const data = new FormData(form);
+  if (data.get("budget") === "Custom amount") data.set("budget", "Custom: " + String(data.get("custom_budget") || "").trim());
+  data.delete("custom_budget");
+  if (!files.files.length) data.delete("attachment");
+  data.set("_subject", "New brief from " + data.get("name"));
+  data.set("_template", "table");
   sendBtn.disabled = true; sendBtn.textContent = "Sending…"; msg.textContent = "";
   try {
-    const res = await fetch(FORM_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(data) });
+    const res = await fetch(FORM_ENDPOINT, { method: "POST", headers: { "Accept": "application/json" }, body: data });
     const out = await res.json().catch(() => ({}));
     if (!res.ok || out.success === "false" || out.success === false) throw new Error(out.message || "failed");
-    form.reset(); custWrap.hidden = true; cust.required = false;
+    form.reset(); custWrap.hidden = true; cust.required = false; syncSvc(); collapseAll(); resetFiles();
     msg.textContent = "Thank you. Your brief is on its way, and I’ll reply by email.";
   } catch (err) {
     msg.innerHTML = `Sorry, that didn’t send. Please email me directly at <a href="mailto:${EMAIL}">${EMAIL}</a>.`;
